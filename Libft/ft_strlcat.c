@@ -6,18 +6,10 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:47:13 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/07/21 13:30:48 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:36:41 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-unsigned int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i ++;
-	return (i);
-}
+#include "libft.h"
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {

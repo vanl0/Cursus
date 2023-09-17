@@ -6,13 +6,14 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 14:30:08 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/14 15:00:03 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:04:08 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 void	ft_bzero(void *str, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i < n)

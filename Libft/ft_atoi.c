@@ -6,9 +6,10 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 13:40:12 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/13 14:05:30 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:57:28 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 int	ft_atoi(char *str)
 {

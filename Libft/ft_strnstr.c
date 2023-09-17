@@ -6,14 +6,15 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 15:56:24 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/15 13:37:24 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:45:24 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
 char	*ft_strnstr(const char *str, const char *find, size_t len)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	int		j;
 
 	i = 0;
 	j = 0;

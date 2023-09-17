@@ -6,13 +6,14 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 12:18:27 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/13 12:21:07 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:33:02 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i] != '\0')
