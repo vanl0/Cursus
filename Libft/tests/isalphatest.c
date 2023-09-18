@@ -1,60 +1,22 @@
-#include "../libft.h"
+#include "libft.h"
+#include "libtest.h"
 
-int	isalphatest(char a1, char a2, char a3, char a4, char a5, char a6)
+void	isalphatest(char data[5])
 {
-	int 	res;
-	char	c;
 	printf("ft_isalpha:\n");
+	char c;
+	int res1;
+	int	res2;
 
-	c = a1;
-	res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-
-	
-	c = a2;
-    res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-
-	c = a3;
-    res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-
-	c = a4;
-    res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-
-	c = a5;
-    res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-
-	c = a6;
-    res = ft_isalpha(c);
-    printf("%c -> og: %i  ft: %i", a1, isalpha(c), ft_isalpha(c));
-    if (c == res)
-        printf("    YES :)\n");
-    else
-        printf("     NO :(\n");
-	
-	return (0);
+	for (int i = 0; i < 5; i++)
+	{
+		c = data[i];
+		res1 = isalpha(c);
+		res2 = ft_isalpha(c);
+		printf("%c -> %i : %i", c, res1, res2);
+		int_checker(res1, res2);
+	}
+	printf("\n");
+	return;
 }
 
