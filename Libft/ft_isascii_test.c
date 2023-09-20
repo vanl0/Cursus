@@ -1,4 +1,4 @@
-#include "libtest.h"
+#include "libft.h"
 
 void	isasciitest(char data[5])
 {

@@ -1,4 +1,4 @@
-#include "libtest.h"
+#include "libft.h"
 
 void	atoitest(char *data[5])
 {

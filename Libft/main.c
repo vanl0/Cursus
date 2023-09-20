@@ -1,4 +1,3 @@
-#include "libtest.h"
 #include "libft.h"
 
 int main (void)
@@ -15,6 +14,7 @@ int main (void)
 	//2 - isdigit
 	//isalphatest(data);
 	//3 - isascii
+	data[1] = (char)230;
 	isasciitest(data);
 	//4 - isalnum
 //	isalnumtest(data);

@@ -1,4 +1,4 @@
-#include "libtest.h"
+#include "libft.h"
 
 int	char_checker(char res1, char res2)
 {

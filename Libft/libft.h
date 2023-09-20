@@ -9,9 +9,12 @@
 /*   Updated: 2023/09/18 12:09:41 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef LIBFT_H
+#define LIBFT_H
+
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <ctype.h>
 int				ft_isalpha(char c);
 int				ft_isdigit(char c);
 int				ft_isalnum(char c);
@@ -38,3 +41,13 @@ char			*ft_strnstr(const char *str, const char *find, size_t len);
 char			*ft_strrchr(const char *str, int c);
 
 int				ft_atoi(char *str);
+//-------------------------------TESTERS---------------------------------------//
+int	char_checker(char res1, char res2);
+int 	int_checker(int res1, int res2);
+
+void	atoitest(char *data[5]);
+
+void	isalphatest(char data[5]);
+void	isasciitest(char data[5]);
+
+#endif
