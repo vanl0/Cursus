@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/15 15:53:12 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/17 14:21:29 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/07/17 20:09:01 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/21 13:21:44 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stddef.h>
 
-void	*ft_memmove(void *dest, const char *src, size_t len)
+int	ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	size_t	i;
-	char	*cdest;
-	char	*csrc;
-	char	temp[6];
+	unsigned int	i;
+	unsigned char	*ucs1;
+	unsigned char	*ucs2;
 
-	i = 0;
-	cdest = (char *)dest;
-	csrc = (char *)src;
-	while (i < len)
+	ucs1 = (unsigned char *)s1;
+	ucs2 = (unsigned char *)s2;
+	i = 1;
+	if (n == 0)
+		return (0);
+	if (ucs1[0] != ucs2[0])
+		return (ucs1[0] - ucs2[0]);
+	while (ucs1[i - 1] != '\0' && i < n)
 	{
-		temp[i] = csrc[i];
-		i++;
+		if (ucs1[i] != ucs2[i])
+			return (ucs1[i] - ucs2[i]);
+		i ++;
 	}
-	i = 0;
-	while (i < len)
-	{
-		cdest[i] = temp[i];
-		i++;
-	}
-	return (dest);
+	return (0);
 }

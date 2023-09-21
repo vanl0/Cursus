@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 13:33:27 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/13 13:35:13 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/15 15:53:12 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/21 11:01:30 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	ft_toupper(char c)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	if ('a' <= c && c <= 'z')
-		return (c - 32);
-	return (c);
+	size_t	i;
+	char	*cdest;
+	char	*csrc;
+
+	if (dest == NULL && src == NULL)
+		return (NULL);
+	i = 0;
+	cdest = (char *)dest;
+	csrc = (char *)src;
+	if (csrc < cdest)
+	{
+		while (len-- > 0)
+			cdest[len] = csrc[len];
+	}
+	else
+	{
+		while (i < len)
+		{
+			cdest[i] = csrc[i];
+			i++;
+		}
+	}
+	return (dest);
 }
