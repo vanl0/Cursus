@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 14:47:03 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/21 11:56:15 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/22 17:13:53 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/22 19:15:08 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef LIBFT_H
 # define LIBFT_H
 
@@ -31,11 +30,15 @@ void			ft_bzero(void *s, size_t n);
 size_t			ft_strlen(const char *str);
 char			*ft_strchr(const char *str, int c);
 char			*ft_strdup(const char *s);
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+size_t	        ft_strlcat(char *restrict dest, const char *restrict src, size_t size);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_strnstr(const char *str, const char *find, size_t len);
 char			*ft_strrchr(const char *str, int c);
 int				ft_atoi(char *str);
+void			*ft_calloc(size_t nmemb, size_t size);
 
+char			*ft_substr(char const *s, unsigned int start, size_t len);
+char            *ft_strjoin(char const *s1, char const *s2);
+char			*strtrim(char const *s1, char const *set);
 #endif

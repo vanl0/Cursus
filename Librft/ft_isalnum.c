@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 15:56:24 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/21 12:16:01 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/13 11:42:39 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/21 09:00:08 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strnstr(const char *str, const char *find, size_t len)
+int	ft_isalnum(int c)
 {
-	size_t	i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if (*find == '\0')
-		return ((char *)str);
-	while (i < len && str[i] != '\0')
-	{
-		while (find[j] == str[i + j] && i + j < len)
-		{
-			j++;
-			if (find[j] == '\0')
-				return ((char *)&str[i]);
-		}
-		i++;
-		j = 0;
-	}
-	return (NULL);
+	if ('0' <= c && c <= '9')
+		return (1);
+	if ('A' <= c && c <= 'Z')
+		return (1);
+	if ('a' <= c && c <= 'z')
+		return (1);
+	return (0);
 }
