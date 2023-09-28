@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 13:33:27 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/21 12:07:23 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/27 18:33:01 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/27 18:33:12 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-int	ft_toupper(int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if ('a' <= c && c <= 'z')
-		return (c - 32);
-	return (c);
+	char	*strmapi;
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s);
+	strmapi = malloc((len + 1) * sizeof(char));
+	if (!strmapi)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		strmapi[i] = (*f)(i, s[i]);
+		i++;
+	}
+	strmapi[i] = '\0';
+	return (strmapi);
 }

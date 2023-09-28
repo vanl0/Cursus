@@ -1,38 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/22 17:14:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/09/26 19:14:18 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/27 19:18:47 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/27 19:39:55 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static void	ft_putchar(char c, int fd)
 {
-	char	*strjoin;
-	int		n;
-	int		i;
-	int		j;
+	write(fd, &c, 1);
+}
 
-	n = ft_strlen(s1) + ft_strlen(s2) + 1;
-	strjoin = malloc(n * sizeof(char));
-	if (!s1 || !s2 || strjoin == NULL)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
+static void	printnum(int fd)
+{
+	write(fd, "-2147483648", 11);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n == -2147483648)
 	{
-		strjoin[i] = s1[i];
-		i++;
+		printnum (fd);
+		return ;
 	}
-	while (s2[j] != '\0')
+	if (n == 0)
 	{
-		strjoin[i++] = s2[j++];
+		write(fd, "0", 1);
+		return ;
 	}
-	strjoin[i] = '\0';
-	return (strjoin);
+	if (n < 0)
+	{
+		n = -n;
+		write(fd, "-", 1);
+	}
+	if (n >= 10)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	if (n < 10)
+	{
+		ft_putchar(n + '0', fd);
+	}
 }
