@@ -33,7 +33,7 @@ int	main(void)
 	t_pack	pack;
 
 	pack_init(&pack);
-	load_map(&pack.map, "./test_maps/42.fdf");
+	load_map(&pack.map, "./test_maps/pylone.fdf");
 	mlx_key_hook(pack.img.win.win_ptr, handle_input, &pack);
 	mlx_loop(pack.img.win.mlx_ptr);
 	return (0);

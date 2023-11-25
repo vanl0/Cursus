@@ -10,7 +10,7 @@ void    draw_map(t_map *map, t_img_data *img)
     //printf("connect_x ✅\n");
     connect_y(map, img);
     //printf("connect_y ✅\n");
-    mlx_put_image_to_window(img->win.mlx_ptr, img->win.win_ptr, img->img, 300, 100);
+    mlx_put_image_to_window(img->win.mlx_ptr, img->win.win_ptr, img->img, 50, 50);
     //printf("image ✅\n");
 }
 int scale = 20;
@@ -23,10 +23,10 @@ void    connect_x(t_map *map, t_img_data *img)
     j = 0;
     while (i + 1 < map->xlen * map->ylen)
     {
-        //printf("\x1b[31m" "Linea X: %i\n", j);
-        while ((i < map->xlen * map->ylen) && j < map->ylen - 1)
+       // printf("\x1b[31m" "Linea X: %i\n", j);
+        while ((i < map->xlen * map->ylen) && j < map->xlen - 1)
         {
-            //printf("\x1b[37m" "Linea: p0: %i, p1: %i\n r0: %f, %f\n r1: %f, %f\n", i, i + 1, map->points[i].x, map->points[i].y, map->points[i + 1].x, map->points[i + 1].y);
+           // printf("\x1b[37m" "Linea: p0: %i, p1: %i\n r0: %f, %f\n r1: %f, %f\n", i, i + 1, map->points[i].x, map->points[i].y, map->points[i + 1].x, map->points[i + 1].y);
             draw_line(img, map->points[i], map->points[i + 1], scale);
             i++;
             j++;

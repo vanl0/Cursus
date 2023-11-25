@@ -18,7 +18,7 @@ t_map   iso_map(t_map *map)
         y = map->points[i].y;
         z = map->points[i].z;
         iso_map.points[i].x = (x - y) * cos(0.523599);
-        iso_map.points[i].y = -z + ((x + y) * sin(0.523599));
+        iso_map.points[i].y = - z/5 + ((x + y) * sin(0.523599));
         i++;
     }
     iso_map.xlen = map->xlen;
