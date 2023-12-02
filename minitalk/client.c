@@ -12,18 +12,46 @@
 
 #include <unistd.h>
 #include <signal.h>
-#include <studio.h>
 
-void	send_char(char	**argv)
+#include <stdlib.h>
+#include <stdio.h>
+
+
+void	send_char(char c, pid_t pid)
 {
+	int	i;
+	int	bit;
 
+	i = 0;
+	while (i < 8)
+	{
+		bit = (c >> (7 - i)) & 1;
+		i++;
+		printf("%d", bit);
+		kill (pid, 30 + bit);
+		usleep(100000);
+	}
+	printf("\n");
+}
+
+pid_t	get_pid(char	*arg)
+{
+	pid_t	pid;
+
+	pid = (pid_t) atoi(arg);
+	return (pid);
+}
 
 int main(int argc, char **argv)
 {
+	pid_t pid;
+
 	if (argc != 3)
 	{
 		printf("PID and MSG needed\n");
 		return (0);
 	}
+	pid = get_pid(argv[1]);
+	send_char(argv[2][0], pid);
 	return (1);
 }

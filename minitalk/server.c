@@ -13,11 +13,21 @@
 #include <unistd.h>
 #include <stdio.h>
 
+
+void gotsign(int signal)
+{
+	if (signal == SIGUSR1)
+		printf("0");
+	else
+		printf("1");
+}
+
 int	main(void)
 {
-	pid_t	pid;
-
-	pid = getpid();
-	printf("pid: %d\nSIGUSR1: %d\nSIGUSR2: %d\n", pid, SIGUSR1, SIGUSR2);
+	signal(SIGUSR1, gotsign);
+	signal(SIGUSR2, gotsign);
+	printf("PID: %d\n", getpid());
+	while(1)
+		pause();
 	return (0);
 }
