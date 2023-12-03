@@ -27,9 +27,9 @@ void	send_char(char c, pid_t pid)
 	{
 		bit = (c >> (7 - i)) & 1;
 		i++;
-		printf("%d", bit);
+		//printf("%d", bit);
 		kill (pid, 30 + bit);
-		usleep(100);
+		usleep(10000);
 	}
 	printf("\n");
 }
@@ -45,6 +45,7 @@ pid_t	get_pid(char	*arg)
 int main(int argc, char **argv)
 {
 	pid_t pid;
+	int i = 0;
 
 	if (argc != 3)
 	{
@@ -52,6 +53,7 @@ int main(int argc, char **argv)
 		return (0);
 	}
 	pid = get_pid(argv[1]);
-	send_char(argv[2][0], pid);
+	while(argv[2][i])
+		send_char(argv[2][i++], pid);
 	return (1);
 }

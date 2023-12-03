@@ -13,15 +13,24 @@
 #include <unistd.h>
 #include <stdio.h>
 
+
 void gotsign(int signal) 
 {
 	static int bit_pos = 0;
 	static char	tchar = 0;
 
-	if (signal == SIGUSR1)
+	if (signal == SIGUSR2)
 	{
-
+        tchar |= (1 << (7 - bit_pos));
 	}
+    bit_pos++;
+    if (bit_pos == 8)
+    {
+        //send_char(tchar);
+        write(1, &tchar, 1);
+        bit_pos = 0;
+        tchar = 0;
+    }
 }
 
 int main(void) {
