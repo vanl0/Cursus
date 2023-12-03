@@ -13,21 +13,31 @@
 #include <unistd.h>
 #include <stdio.h>
 
-
-void gotsign(int signal)
+void gotsign(int signal) 
 {
+	static int bit_pos = 0;
+	static char	tchar = 0;
+
 	if (signal == SIGUSR1)
-		printf("0");
-	else
-		printf("1");
+	{
+
+	}
 }
 
-int	main(void)
-{
-	signal(SIGUSR1, gotsign);
-	signal(SIGUSR2, gotsign);
-	printf("PID: %d\n", getpid());
-	while(1)
-		pause();
-	return (0);
+int main(void) {
+    struct sigaction sa;
+    sa.sa_handler = gotsign;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+
+    sigaction(SIGUSR1, &sa, NULL);
+    sigaction(SIGUSR2, &sa, NULL);
+
+    printf("PID: %d\n", getpid());
+
+    while (1) {
+        pause();
+    }
+
+    return 0;
 }

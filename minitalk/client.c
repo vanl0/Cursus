@@ -29,7 +29,7 @@ void	send_char(char c, pid_t pid)
 		i++;
 		printf("%d", bit);
 		kill (pid, 30 + bit);
-		usleep(100000);
+		usleep(100);
 	}
 	printf("\n");
 }
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("PID and MSG needed\n");
+		printf("PID and CHR needed\n");
 		return (0);
 	}
 	pid = get_pid(argv[1]);
