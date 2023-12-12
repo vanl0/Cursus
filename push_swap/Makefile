@@ -22,7 +22,7 @@ PRINTF_HEADER = $(PRINTF_DIR)
 
 #	SRCS-------------------------------------------
 SRCS_DIR = ./srcs/
-SRCS_LS = push_swap.c 
+SRCS_LS = push_swap.c add_data.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 #	OBJS-------------------------------------------
 OBJS_DIR = ./objs/
@@ -34,6 +34,8 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(FT_PRINTF) $(HEADERS) $(OBJS_DIR) $(OBJS) Makefile
 	$(CC) $(FLAGS) $(LIB_FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 
+$(OBJS_DIR):
+	mkdir objs
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADERS)
 	$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
