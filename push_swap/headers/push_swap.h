@@ -5,20 +5,27 @@
 # include "../libs/ft_printf/ft_printf.h"
 # include "../libs/Libft/libft.h"
 # include <stdio.h>
-typedef struct s_data_a
+typedef struct s_data
 {
     int val;
     int pos;
-    struct s_data_a *next;
-}t_data_a;
+    struct s_data *next;
+}t_data;
 
-typedef struct s_data_b
-{
-    int val;
-    int pos;
-    int 
-    struct s_data_b *next;
-}t_data_b;
 
-void add_data(t_data_a **first, char *num);
+void add_data(t_data **first, char *num);
+
+int sorted(t_data **afirst);
+//MOVES-----------------------------------
+void sa(t_data **afirst);
+void sb(t_data **bfirst);
+void ss(t_data **afirst, t_data **bfirst);
+void pa(t_data **afirst, t_data **bfirst);
+void pb(t_data **afirst, t_data **bfirst);
+void ra(t_data **afirst);
+void rb(t_data **bfirst);
+void rr(t_data **afirst, t_data **bfirst);
+void rra(t_data **afirst);
+void rrb(t_data **bfirst);
+void rrr(t_data **afirst, t_data **bfirst);
 #endif

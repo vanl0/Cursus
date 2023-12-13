@@ -22,7 +22,8 @@ PRINTF_HEADER = $(PRINTF_DIR)
 
 #	SRCS-------------------------------------------
 SRCS_DIR = ./srcs/
-SRCS_LS = push_swap.c add_data.c
+SRCS_LS = push_swap.c add_data.c s_moves.c p_moves.c r_moves.c rr_moves.c \
+			check.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 #	OBJS-------------------------------------------
 OBJS_DIR = ./objs/

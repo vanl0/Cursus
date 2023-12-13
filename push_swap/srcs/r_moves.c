@@ -1,32 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_data.c                                         :+:      :+:    :+:   */
+/*   r_moves.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 13:20:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:21:28 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/12/13 13:23:30 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/12/13 13:25:04 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	add_data(t_data **first, char *num)
+void	ra(t_data **afirst)
 {
+	t_data	*tmp;
 	t_data	*elem;
-	t_data	*new_elem;
 
-	new_elem = (t_data *)malloc(sizeof(t_data));
-	new_elem->val = ft_atoi(num);
-	new_elem->next = NULL;
-	elem = *first;
-	if (!elem)
-		*first = new_elem;
-	else
-	{
-		while (elem->next)
-			elem = elem->next;
-		elem->next = new_elem;
-	}
+	tmp = *afirst;
+	elem = *afirst;
+	*afirst = (*afirst)->next;
+	while (elem->next)
+		elem = elem->next;
+	elem->next = tmp;
+	tmp->next = NULL;
+}
+
+void	rb(t_data **bfirst)
+{
+	t_data	*tmp;
+	t_data	*elem;
+
+	tmp = *bfirst;
+	elem = *bfirst;
+	*bfirst = (*bfirst)->next;
+	while (elem->next)
+		elem = elem->next;
+	elem->next = tmp;
+	tmp->next = NULL;
+}
+
+void	rr(t_data **afirst, t_data **bfirst)
+{
+	ra(afirst);
+	rb(bfirst);
 }

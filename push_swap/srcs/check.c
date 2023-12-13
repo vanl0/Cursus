@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_data.c                                         :+:      :+:    :+:   */
+/*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 13:20:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:21:28 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/12/13 13:21:46 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/12/13 13:22:26 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	add_data(t_data **first, char *num)
+int	sorted(t_data **afirst)
 {
+	int		maxval;
 	t_data	*elem;
-	t_data	*new_elem;
 
-	new_elem = (t_data *)malloc(sizeof(t_data));
-	new_elem->val = ft_atoi(num);
-	new_elem->next = NULL;
-	elem = *first;
-	if (!elem)
-		*first = new_elem;
-	else
+	if (!afirst || !*afirst)
+		return (0);
+	elem = *afirst;
+	maxval = elem->val;
+	elem = elem->next;
+	while (elem)
 	{
-		while (elem->next)
-			elem = elem->next;
-		elem->next = new_elem;
+		if (elem->val < maxval)
+			return (0);
+		maxval = elem->val;
+		elem = elem->next;
 	}
+	return (1);
 }

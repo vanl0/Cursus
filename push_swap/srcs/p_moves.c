@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_data.c                                         :+:      :+:    :+:   */
+/*   p_moves.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/13 13:20:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/12/13 13:21:28 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/12/13 13:22:48 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/12/13 13:23:16 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-void	add_data(t_data **first, char *num)
+void	pa(t_data **afirst, t_data **bfirst)
 {
-	t_data	*elem;
-	t_data	*new_elem;
+	t_data	*tmp;
 
-	new_elem = (t_data *)malloc(sizeof(t_data));
-	new_elem->val = ft_atoi(num);
-	new_elem->next = NULL;
-	elem = *first;
-	if (!elem)
-		*first = new_elem;
-	else
+	if (bfirst && (*bfirst))
 	{
-		while (elem->next)
-			elem = elem->next;
-		elem->next = new_elem;
+		tmp = (*bfirst)->next;
+		(*bfirst)->next = *afirst;
+		*afirst = *bfirst;
+		*bfirst = tmp;
+	}
+}
+
+void	pb(t_data **afirst, t_data **bfirst)
+{
+	t_data	*tmp;
+
+	if (afirst && (*afirst))
+	{
+		tmp = (*afirst)->next;
+		(*afirst)->next = *bfirst;
+		*bfirst = *afirst;
+		*afirst = tmp;
 	}
 }
