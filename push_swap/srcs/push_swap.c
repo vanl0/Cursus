@@ -67,18 +67,20 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	afirst = NULL;
+	bfirst = NULL;
 	while (i < argc)
 	{
 		add_data(&afirst, argv[i]);
 		i++;
 	}
-	add_data(&bfirst, "7");
+	/*add_data(&bfirst, "7");
 	add_data(&bfirst, "8");
 	add_data(&bfirst, "9");
+	*/
 	print_parallel_lists(afirst, bfirst);
 	printf("\n");
 	//pb(&afirst, &bfirst);
-	sa(&afirst);
+	//sa(&afirst);
 	//sb(&bfirst);
 	//ra(&afirst);
 	//rb(&bfirst);
@@ -86,6 +88,8 @@ int	main(int argc, char **argv)
 	//rra(&afirst);
 	//rrb(&bfirst);
 	//rrr(&afirst, &bfirst);
+	index_stack(&afirst);
+	radix_sort(&afirst, &bfirst, argc);
 	print_parallel_lists(afirst, bfirst);
 	if (sorted(&afirst))
 		printf("SORTED!!\n");

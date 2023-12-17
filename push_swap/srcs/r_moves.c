@@ -17,6 +17,8 @@ void	ra(t_data **afirst)
 	t_data	*tmp;
 	t_data	*elem;
 
+	if (!afirst || !(*afirst)->next)
+		return ;
 	tmp = *afirst;
 	elem = *afirst;
 	*afirst = (*afirst)->next;
