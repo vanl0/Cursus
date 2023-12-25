@@ -19,6 +19,10 @@ void	add_data(t_data **first, char *num)
 
 	new_elem = (t_data *)malloc(sizeof(t_data));
 	new_elem->val = ft_atoi(num);
+	new_elem->rb = 0;
+    new_elem->rrb = 0;
+    new_elem->ra = 0;
+    new_elem->rra = 0;
 	new_elem->next = NULL;
 	elem = *first;
 	if (!elem)
