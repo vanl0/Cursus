@@ -15,10 +15,14 @@ typedef struct s_data
     int rrb;
     int ra;
     int rra;
+    int rr;
+    int rrr;
     struct s_data *next;
 }t_data;
 
 void    set_moves(t_data **a_stack, t_data **b_stack);
+int    calc_rr(t_data *b_elem);
+void    do_moves(t_data **a_stack, t_data **b_stack);
 void    add_data(t_data **first, char *num);
 
 int sorted(t_data **afirst);

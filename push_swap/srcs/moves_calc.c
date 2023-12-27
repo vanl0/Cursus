@@ -74,6 +74,32 @@ int calc_moves_a(t_data **a_stack, t_data *b_elem)
     }
 }
 
+int    calc_rr(t_data *elem)
+{
+
+    if (elem->ra > 0 && elem->rb > 0)
+    {
+        if (elem->ra >= elem->rb)
+            elem->rr = elem->rb;
+        else if(elem->ra < elem->rb)
+            elem->rr = elem->ra;
+        elem->ra -= elem->rr;
+        elem->rb -= elem->rr;
+        return (elem->rr);
+    }
+    if (elem->rra > 0 && elem->rrb > 0)
+    {
+        if (elem->rra >= elem->rrb)
+            elem->rrr = elem->rrb;
+        else if(elem->rra < elem->rrb)
+            elem->rrr = elem->rra;
+        elem->rra -= elem->rrr;
+        elem->rrb -= elem->rrr;
+        return(elem->rrr);
+    }
+    return (0);
+}
+
 void    set_moves(t_data **a_stack, t_data **b_stack)
 {
     int b_len;
@@ -88,7 +114,7 @@ void    set_moves(t_data **a_stack, t_data **b_stack)
     i = 0;
     while (b_elem)
     {
-        b_elem->moves = calc_moves_b(i, b_len, b_elem) + calc_moves_a(a_stack, b_elem);
+        b_elem->moves = calc_moves_b(i, b_len, b_elem) + calc_moves_a(a_stack, b_elem) - calc_rr(b_elem);
         b_elem = b_elem->next;
         i++;
     }
