@@ -8,7 +8,6 @@
 typedef struct s_data
 {
     int val;
-    int pos;
     int moves;
     int target;
     int rb;
@@ -20,12 +19,31 @@ typedef struct s_data
     struct s_data *next;
 }t_data;
 
-void    set_moves(t_data **a_stack, t_data **b_stack);
-int    calc_rr(t_data *b_elem);
-void    do_moves(t_data **a_stack, t_data **b_stack);
-void    add_data(t_data **first, char *num);
+typedef struct s_lis
+{
+    int *val;
+    int *lis_len;
+    int *lis_prev;
+    int *lis;
+    int maxlen;
+    int max_i;
+    int len;
+}t_lis;
 
-int sorted(t_data **afirst);
+
+
+void    add_data(t_data **first, char *num);
+void    free_list(t_data* first);
+//CALC_MOVES------------------------------
+void    set_moves(t_data **a_stack, t_data **b_stack);
+int     get_min(t_data **a_stack, t_data *b_elem);
+void	do_moves(t_data **a_stack, t_data **b_stack);
+//L.I.S-----------------------------------
+t_lis   find_lis(t_data **a_stack);
+void    lis_pb(t_data **a_stack, t_data **b_stack, t_lis  lis);
+//CHECK-----------------------------------
+void	sort(t_data **a_stack);
+int     get_stack_len(t_data **stack);
 //MOVES-----------------------------------
 void sa(t_data **afirst);
 void sb(t_data **bfirst);
@@ -38,4 +56,8 @@ void rr(t_data **afirst, t_data **bfirst);
 void rra(t_data **afirst);
 void rrb(t_data **bfirst);
 void rrr(t_data **afirst, t_data **bfirst);
+
+//DEBUG-----------------------------------
+void print_parallel_lists(t_data* first1, t_data* first2);
+void print_simple(t_data* first1, t_data* first2);
 #endif

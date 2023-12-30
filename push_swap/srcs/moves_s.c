@@ -20,9 +20,7 @@ void	sa(t_data **afirst)
 	if ((*afirst)->next)
 	{
 		(*afirst)->val = (*afirst)->next->val;
-		(*afirst)->pos = 0;
 		(*afirst)->next->val = temp.val;
-		(*afirst)->next->pos = 1;
 	}
 }
 
@@ -34,9 +32,7 @@ void	sb(t_data **bfirst)
 	if ((*bfirst)->next)
 	{
 		(*bfirst)->val = (*bfirst)->next->val;
-		(*bfirst)->pos = 0;
 		(*bfirst)->next->val = temp.val;
-		(*bfirst)->next->pos = 1;
 	}
 }
 

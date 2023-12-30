@@ -6,8 +6,7 @@ INCLUDES = -I$(MOVES) -I$(LIBFT_HEADER)
 LIB_FLAGS = -lft -lftprintf -L$(LIBFT_DIR) -L$(PRINTF_DIR)
 
 
-HEADERS = ./headers/
-MOVES = $(HEADERS)moves.h
+HEADERS = ./headers/push_swap.h
 
 LIB_DIR  = ./libs/
 #	LIBFT------------------------------------------
@@ -22,8 +21,11 @@ PRINTF_HEADER = $(PRINTF_DIR)
 
 #	SRCS-------------------------------------------
 SRCS_DIR = ./srcs/
-SRCS_LS = push_swap.c add_data.c s_moves.c p_moves.c r_moves.c rr_moves.c \
-			check.c moves_calc.c do_moves.c
+SRCS_LS =	main.c \
+			add_data.c \
+			moves_s.c moves_p.c moves_r.c moves_rr.c \
+			check.c calc_moves.c LIS.c LIS_pb.c print.c \
+			do_moves.c calc_moves_utils.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 #	OBJS-------------------------------------------
 OBJS_DIR = ./objs/
