@@ -97,7 +97,7 @@ void	do_moves(t_data **a_stack, t_data **b_stack)
 
 	//print_parallel_lists(*a_stack, *b_stack);
 	//printf("min: %d\n", min_elem->val);
-	print_simple(*a_stack, *b_stack);
+	//print_simple(*a_stack, *b_stack);
 	read_moves(min_elem, a_stack, b_stack);
 	reset_moves(b_stack);
 }

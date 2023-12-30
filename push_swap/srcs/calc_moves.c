@@ -35,7 +35,7 @@ int calc_moves_a(t_data **a_stack, t_data *b_elem)
 	a_elem = *a_stack;
 	pos = 0;
 	target_pos = 0;
-	b_elem->target = a_elem->val;
+	b_elem->target = 2147483647;
 	while (a_elem)
 	{
 		if (a_elem->val > b_elem->val)
@@ -55,7 +55,7 @@ int calc_moves_a(t_data **a_stack, t_data *b_elem)
 		a_elem = a_elem->next;
 		pos++;
 	}
-	if (!b_elem->target)
+	if (b_elem->target == 2147483647)
 	{
 		return (get_min(a_stack, b_elem));
 	}

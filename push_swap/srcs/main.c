@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	}
 	sort(&a_stack);
 	//print_simple(a_stack, b_stack);
-	print_parallel_lists(a_stack, b_stack);
+	//print_parallel_lists(a_stack, b_stack);
 	free_list(a_stack);
 	free_list(b_stack);
 	return (0);
