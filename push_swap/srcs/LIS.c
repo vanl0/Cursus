@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 19:55:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2023/12/26 20:00:47 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:50:34 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,6 @@ t_lis	find_lis(t_data **a_stack)
 	}
 	find_max(&lis);
 	set_lis(&lis);
-	/*printf("L.I.S: ");
-	for (int i = 0; i < lis.maxlen; i++)
-	{
-		printf("%d ", lis.lis[i]);
-	}
-	printf("\n");*/
 	return (lis);
 }
 

@@ -38,9 +38,14 @@ void	add_data(t_data **first, char *num)
 	}
 }
 
-void free_list(t_data* first) {
-	while (first) {
-		t_data* temp = first;
+void	free_list(t_data *first)
+{
+	t_data	*temp;
+
+	temp = first;
+	while (first)
+	{
+		temp = first;
 		first = first->next;
 		free(temp);
 	}

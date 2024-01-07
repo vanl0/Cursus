@@ -12,7 +12,7 @@
 
 #include "../headers/push_swap.h"
 
-int calc_moves_b(int i, int b_len, t_data *b_elem)
+int	calc_moves_b(int i, int b_len, t_data *b_elem)
 {
 	if (i <= b_len / 2)
 	{
@@ -26,11 +26,11 @@ int calc_moves_b(int i, int b_len, t_data *b_elem)
 	}
 }
 
-int calc_moves_a(t_data **a_stack, t_data *b_elem)
+int	calc_moves_a(t_data **a_stack, t_data *b_elem)
 {
-	int target_pos;
+	int		target_pos;
 	t_data	*a_elem;
-	int pos;
+	int		pos;
 
 	a_elem = *a_stack;
 	pos = 0;
@@ -40,12 +40,6 @@ int calc_moves_a(t_data **a_stack, t_data *b_elem)
 	{
 		if (a_elem->val > b_elem->val)
 		{
-			/*if (!b_elem->target)
-			{
-				b_elem->target = a_elem->val;
-				target_pos = pos;
-			}else 
-			*/
 			if (a_elem->val < b_elem->target)
 			{
 				b_elem->target = a_elem->val;
@@ -71,14 +65,13 @@ int calc_moves_a(t_data **a_stack, t_data *b_elem)
 	}
 }
 
-int    calc_rr(t_data *elem)
+int	calc_rr(t_data *elem)
 {
-
 	if (elem->ra > 0 && elem->rb > 0)
 	{
 		if (elem->ra >= elem->rb)
 			elem->rr = elem->rb;
-		else if(elem->ra < elem->rb)
+		else if (elem->ra < elem->rb)
 			elem->rr = elem->ra;
 		elem->ra -= elem->rr;
 		elem->rb -= elem->rr;
@@ -88,30 +81,30 @@ int    calc_rr(t_data *elem)
 	{
 		if (elem->rra >= elem->rrb)
 			elem->rrr = elem->rrb;
-		else if(elem->rra < elem->rrb)
+		else if (elem->rra < elem->rrb)
 			elem->rrr = elem->rra;
 		elem->rra -= elem->rrr;
 		elem->rrb -= elem->rrr;
-		return(elem->rrr);
+		return (elem->rrr);
 	}
 	return (0);
 }
 
 void	set_moves(t_data **a_stack, t_data **b_stack)
 {
-	int b_len;
-	int a_len;
-	int i;
+	int		b_len;
+	int		a_len;
+	int		i;
 	t_data	*b_elem;
 
 	a_len = get_stack_len(a_stack);
 	b_len = get_stack_len(b_stack);
-
 	b_elem = *b_stack;
 	i = 0;
 	while (b_elem)
 	{
-		b_elem->moves = calc_moves_b(i, b_len, b_elem) + calc_moves_a(a_stack, b_elem) - calc_rr(b_elem);
+		b_elem->moves = calc_moves_b(i, b_len, b_elem) + \
+		calc_moves_a(a_stack, b_elem) - calc_rr(b_elem);
 		b_elem = b_elem->next;
 		i++;
 	}

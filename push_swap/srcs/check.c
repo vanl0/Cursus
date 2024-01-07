@@ -39,10 +39,11 @@ void	sort(t_data **a_stack)
 		ra(a_stack);
 		printf("ra\n");
 	}
-} 
-int get_stack_len(t_data **stack)
+}
+
+int	get_stack_len(t_data **stack)
 {
-	int len;
+	int		len;
 	t_data	*elem;
 
 	if (!stack || !(*stack))

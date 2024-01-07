@@ -1,49 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/07 19:55:55 by ilorenzo          #+#    #+#             */
+/*   Updated: 2024/01/07 19:55:57 by ilorenzo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MOVES_H
-# define MOVES_H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include "../libs/ft_printf/ft_printf.h"
 # include "../libs/Libft/libft.h"
 # include <stdio.h>
+
 typedef struct s_data
 {
     int val;
-    int moves;
-    int target;
-    int rb;
-    int rrb;
-    int ra;
-    int rra;
-    int rr;
-    int rrr;
-    struct s_data *next;
+	int moves;
+	int target;
+	int rb;
+	int rrb;
+	int ra;
+	int rra;
+	int rr;
+	int rrr;
+	struct s_data *next;
 }t_data;
 
 typedef struct s_lis
 {
-    int *val;
-    int *lis_len;
-    int *lis_prev;
-    int *lis;
-    int maxlen;
-    int max_i;
-    int len;
+	int *val;
+	int *lis_len;
+	int *lis_prev;
+	int *lis;
+	int maxlen;
+	int max_i;
+	int len;
 }t_lis;
 
-
-
-void    add_data(t_data **first, char *num);
-void    free_list(t_data* first);
+void	add_data(t_data **first, char *num);
+void	free_list(t_data* first);
 //CALC_MOVES------------------------------
-void    set_moves(t_data **a_stack, t_data **b_stack);
-int     get_min(t_data **a_stack, t_data *b_elem);
+void	set_moves(t_data **a_stack, t_data **b_stack);
+int		get_min(t_data **a_stack, t_data *b_elem);
 void	do_moves(t_data **a_stack, t_data **b_stack);
+void	do_r(t_data *elem, t_data **a_stack, t_data **b_stack);
+void	do_rr(t_data *elem, t_data **a_stack, t_data **b_stack);
 //L.I.S-----------------------------------
-t_lis   find_lis(t_data **a_stack);
-void    lis_pb(t_data **a_stack, t_data **b_stack, t_lis  lis);
+t_lis	find_lis(t_data **a_stack);
+void	lis_pb(t_data **a_stack, t_data **b_stack, t_lis  lis);
 //CHECK-----------------------------------
 void	sort(t_data **a_stack);
-int     get_stack_len(t_data **stack);
+int		get_stack_len(t_data **stack);
 //MOVES-----------------------------------
 void sa(t_data **afirst);
 void sb(t_data **bfirst);

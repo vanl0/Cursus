@@ -1,29 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   calc_moves_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/07 18:43:49 by ilorenzo          #+#    #+#             */
+/*   Updated: 2024/01/07 18:44:29 by ilorenzo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-int    get_min(t_data **a_stack, t_data *b_elem)
+int	get_min(t_data **a_stack, t_data *b_elem)
 {
-    t_data  *elem;
-    int     min;
-    int     target_pos;
-    int     pos;
+	t_data	*elem;
+	int		min;
+	int		target_pos;
+	int		pos;
 
-    elem = *a_stack;
-    min = elem->val;
-    target_pos = 0;
-    pos = 0;
-    while (elem)
-    {
-        if (elem->val < min)
-        {
-            min = elem->val;
-            target_pos = pos;
-        }
-        pos++;
-        elem = elem->next;
-    }
-    b_elem->target = min;
-    if (target_pos <= pos / 2)
+	elem = *a_stack;
+	min = elem->val;
+	target_pos = 0;
+	pos = 0;
+	while (elem)
+	{
+		if (elem->val < min)
+		{
+			min = elem->val;
+			target_pos = pos;
+		}
+		pos++;
+		elem = elem->next;
+	}
+	b_elem->target = min;
+	if (target_pos <= pos / 2)
 	{
 		b_elem->ra = target_pos;
 		return (target_pos);
