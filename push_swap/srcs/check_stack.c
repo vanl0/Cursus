@@ -32,12 +32,12 @@ int	sorted(t_data **a_stack)
 	return (1);
 }
 
-void	sort(t_data **a_stack)
+void	final_sort(t_data **a_stack)
 {
 	while (!sorted(a_stack))
 	{
 		ra(a_stack);
-		printf("ra\n");
+		ft_printf("ra\n");
 	}
 }
 

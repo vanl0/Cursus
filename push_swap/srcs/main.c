@@ -12,6 +12,16 @@
 
 #include "../headers/push_swap.h"
 
+void	sort(t_data **a_stack, t_data **b_stack)
+{
+	while (*b_stack)
+	{
+		set_moves(a_stack, b_stack);
+		do_moves(a_stack, b_stack);
+	}
+	final_sort(a_stack);
+}
+
 int	main(int argc, char **argv)
 {
 	int			i;
@@ -19,23 +29,23 @@ int	main(int argc, char **argv)
 	t_data		*b_stack;
 
 	i = 1;
-	if (argc < 3)
-		return (ft_printf("Error\n"));
 	a_stack = NULL;
 	b_stack = NULL;
+	if (argc < 3)
+		return (ft_printf("Error\n"));
 	while (i < argc)
 	{
-		add_data(&a_stack, argv[i]);
+		if (!add_data(&a_stack, argv[i]))
+			return (ft_printf("Error\n"));
 		i++;
 	}
-	lis_pb(&a_stack, &b_stack, find_lis(&a_stack));
-	while (b_stack)
+	if (sorted(&a_stack))
 	{
-		set_moves(&a_stack, &b_stack);
-		do_moves(&a_stack, &b_stack);
+		free_list(a_stack);
+		return (0);
 	}
-	sort(&a_stack);
+	lis_pb(&a_stack, &b_stack, find_lis(&a_stack));
+	sort(&a_stack, &b_stack);
 	free_list(a_stack);
-	free_list(b_stack);
 	return (0);
 }

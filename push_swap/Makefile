@@ -21,11 +21,12 @@ PRINTF_HEADER = $(PRINTF_DIR)
 
 #	SRCS-------------------------------------------
 SRCS_DIR = ./srcs/
-SRCS_LS =	main.c \
-			add_data.c \
+SRCS_LS =	main.c add_data.c \
 			moves_s.c moves_p.c moves_r.c moves_rr.c \
-			check.c calc_moves.c LIS.c LIS_pb.c .print.c \
-			do_moves.c do_moves_utils.c calc_moves_utils.c
+			LIS.c LIS_pb.c \
+			calc_moves.c calc_moves_utils.c \
+			do_moves.c do_moves_utils.c \
+			check_stack.c check_arg.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 #	OBJS-------------------------------------------
 OBJS_DIR = ./objs/

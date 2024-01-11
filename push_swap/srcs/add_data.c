@@ -12,13 +12,11 @@
 
 #include "../headers/push_swap.h"
 
-void	add_data(t_data **first, char *num)
+t_data	*data_init(void)
 {
-	t_data	*elem;
 	t_data	*new_elem;
 
 	new_elem = (t_data *)malloc(sizeof(t_data));
-	new_elem->val = ft_atoi(num);
 	new_elem->rb = 0;
 	new_elem->rrb = 0;
 	new_elem->ra = 0;
@@ -27,15 +25,26 @@ void	add_data(t_data **first, char *num)
 	new_elem->rrr = 0;
 	new_elem->target = 0;
 	new_elem->next = NULL;
-	elem = *first;
+	return (new_elem);
+}
+
+int	add_data(t_data **a_stack, char *num)
+{
+	t_data	*elem;
+	t_data	*new_elem;
+
+	new_elem = data_init();
+	new_elem->val = ft_atoi(num);
+	elem = *a_stack;
 	if (!elem)
-		*first = new_elem;
+		*a_stack = new_elem;
 	else
 	{
 		while (elem->next)
 			elem = elem->next;
 		elem->next = new_elem;
 	}
+	return (check_arg(a_stack, num));
 }
 
 void	free_list(t_data *first)

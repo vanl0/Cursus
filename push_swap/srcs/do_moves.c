@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 18:40:13 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/01/07 19:16:51 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:13:27 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	read_moves(t_data *b_elem, t_data **a_stack, t_data **b_stack)
 	do_r(b_elem, a_stack, b_stack);
 	do_rr(b_elem, a_stack, b_stack);
 	pa(a_stack, b_stack);
-	printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	do_moves(t_data **a_stack, t_data **b_stack)

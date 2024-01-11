@@ -28,13 +28,13 @@ void	lis_pb(t_data **a_stack, t_data **b_stack, t_lis lis)
 		if ((*a_stack)->val == lis.lis[i])
 		{
 			ra(a_stack);
-			printf("ra\n");
+			ft_printf("ra\n");
 			i++;
 		}
 		else
 		{
 			pb(a_stack, b_stack);
-			printf("pb\n");
+			ft_printf("pb\n");
 		}
 	}
 	free(lis.lis);

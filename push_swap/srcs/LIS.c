@@ -111,8 +111,3 @@ t_lis	find_lis(t_data **a_stack)
 	set_lis(&lis);
 	return (lis);
 }
-
-/*	for (int i = 0; i < lis.maxlen; i++)
-	{
-		printf("%d ", lis.lis[i]);
-	}*/

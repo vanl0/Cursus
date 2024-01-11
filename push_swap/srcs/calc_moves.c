@@ -26,42 +26,47 @@ int	calc_moves_b(int i, int b_len, t_data *b_elem)
 	}
 }
 
-int	calc_moves_a(t_data **a_stack, t_data *b_elem)
+t_target	set_target(t_data **a_stack, t_data *b_elem)
 {
-	int		target_pos;
-	t_data	*a_elem;
-	int		pos;
+	t_target	target;
+	t_data		*a_elem;
 
 	a_elem = *a_stack;
-	pos = 0;
-	target_pos = 0;
-	b_elem->target = 2147483647;
+	target.pos = 0;
+	target.target_set = 0;
 	while (a_elem)
 	{
 		if (a_elem->val > b_elem->val)
 		{
-			if (a_elem->val < b_elem->target)
+			if (!target.target_set || a_elem->val < b_elem->target)
 			{
 				b_elem->target = a_elem->val;
-				target_pos = pos;
+				target.target_pos = target.pos;
+				target.target_set = 1;
 			}
 		}
 		a_elem = a_elem->next;
-		pos++;
+		target.pos++;
 	}
-	if (b_elem->target == 2147483647)
+	return (target);
+}
+
+int	calc_moves_a(t_data **a_stack, t_data *b_elem)
+{
+	t_target	target;
+
+	target = set_target(a_stack, b_elem);
+	if (!target.target_set)
+		target = get_min(a_stack, b_elem);
+	if (target.target_pos <= target.pos / 2)
 	{
-		return (get_min(a_stack, b_elem));
-	}
-	if (target_pos <= pos / 2)
-	{
-		b_elem->ra = target_pos;
-		return (target_pos);
+		b_elem->ra = target.target_pos;
+		return (target.target_pos);
 	}
 	else
 	{
-		b_elem->rra = pos - target_pos;
-		return (pos - target_pos);
+		b_elem->rra = target.pos - target.target_pos;
+		return (target.pos - target.target_pos);
 	}
 }
 
