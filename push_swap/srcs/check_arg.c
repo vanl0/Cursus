@@ -24,16 +24,21 @@ int	check_arg(t_data **a_stack, char *num)
 
 int	check_int(long num, char *str)
 {
+	int	i;
+
+	i = 0;
 	if (num > 2147483647 || num < -2147483648)
 		return (0);
-	if (*str == '-')
+	if (*str == '-' || *str == '+')
 		str++;
-	while (*str)
+	while (str[i])
 	{
-		if (!ft_isdigit(*str))
+		if (!ft_isdigit(str[i]) || i == 10)
 			return (0);
-		str++;
+		i++;
 	}
+	if (i == 0)
+		return (0);
 	return (1);
 }
 

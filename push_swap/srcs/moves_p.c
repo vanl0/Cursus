@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_moves_utils.c                                 :+:      :+:    :+:   */
+/*   p_moves.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/07 18:43:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/01/14 17:41:02 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/12/13 13:22:48 by ilorenzo          #+#    #+#             */
+/*   Updated: 2024/01/14 17:40:12 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/push_swap.h"
 
-t_target	get_min_target(t_data **a_stack, t_data *b_elem)
+void	pa(t_data **afirst, t_data **bfirst)
 {
-	t_data		*a_elem;
-	int			min;
-	t_target	target;
+	t_data	*tmp;
 
-	a_elem = *a_stack;
-	min = a_elem->val;
-	target.target_pos = 0;
-	target.pos = 0;
-	while (a_elem)
+	if (bfirst && (*bfirst))
 	{
-		if (a_elem->val < min)
-		{
-			min = a_elem->val;
-			target.target_pos = target.pos;
-		}
-		target.pos++;
-		a_elem = a_elem->next;
+		tmp = (*bfirst)->next;
+		(*bfirst)->next = *afirst;
+		*afirst = *bfirst;
+		*bfirst = tmp;
 	}
-	b_elem->target = min;
-	return (target);
+}
+
+void	pb(t_data **afirst, t_data **bfirst)
+{
+	t_data	*tmp;
+
+	if (afirst && (*afirst))
+	{
+		tmp = (*afirst)->next;
+		(*afirst)->next = *bfirst;
+		*bfirst = *afirst;
+		*afirst = tmp;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 19:55:49 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/01/07 18:50:34 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:39:24 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_lis	find_lis(t_data **a_stack)
 	{
 		while (i < j)
 		{
-			if (lis.val[j] > lis.val[i] && lis.lis_len[j] < lis.lis_len[i] + 1)
+			if (lis.val[i] < lis.val[j] && lis.lis_len[j] < lis.lis_len[i] + 1)
 			{
 				lis.lis_len[j] = lis.lis_len[i] + 1;
 				lis.lis_prev[j] = i;

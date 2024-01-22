@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 19:55:55 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/01/10 11:10:44 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:46:22 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,29 @@ typedef struct s_lis
 	int	len;
 }	t_lis;
 
+//DATA------------------------------------
 int			add_data(t_data **first, char *num);
 void		free_list(t_data *first);
-//CALC_MOVES------------------------------
-void		set_moves(t_data **a_stack, t_data **b_stack);
-t_target	get_min(t_data **a_stack, t_data *b_elem);
-void		do_moves(t_data **a_stack, t_data **b_stack);
-void		do_r(t_data *elem, t_data **a_stack, t_data **b_stack);
-void		do_rr(t_data *elem, t_data **a_stack, t_data **b_stack);
+//SMALL_SORT------------------------------
+void		sort_three(t_data **a_stack);
+void		sort_five(t_data **a_stack, t_data **b_stack, int argc);
 //L.I.S-----------------------------------
 t_lis		find_lis(t_data **a_stack);
 void		lis_pb(t_data **a_stack, t_data **b_stack, t_lis lis);
+//CALC_MOVES------------------------------
+void		set_moves(t_data **a_stack, t_data **b_stack);
+t_target	get_min_target(t_data **a_stack, t_data *b_elem);
+void		do_moves(t_data **a_stack, t_data **b_stack);
+void		do_r(t_data *elem, t_data **a_stack, t_data **b_stack);
+void		do_rr(t_data *elem, t_data **a_stack, t_data **b_stack);
 //CHECK-----------------------------------
 int			check_arg(t_data **a_stack, char *num);
 int			is_int(char *str);
 int			check_dup(t_data **a_stack);
+int			get_stack_len(t_data **stack);
+int			get_min_pos(t_data **a_stack);
 int			sorted(t_data **a_stack);
 void		final_sort(t_data **a_stack);
-int			get_stack_len(t_data **stack);
 //MOVES-----------------------------------
 void		sa(t_data **afirst);
 void		sb(t_data **bfirst);
@@ -78,7 +83,4 @@ void		rr(t_data **afirst, t_data **bfirst);
 void		rra(t_data **afirst);
 void		rrb(t_data **bfirst);
 void		rrr(t_data **afirst, t_data **bfirst);
-//DEBUG-----------------------------------
-void		print_parallel_lists(t_data *first1, t_data *first2);
-void		print_simple(t_data *first1, t_data *first2);
 #endif

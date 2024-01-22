@@ -57,7 +57,7 @@ int	calc_moves_a(t_data **a_stack, t_data *b_elem)
 
 	target = set_target(a_stack, b_elem);
 	if (!target.target_set)
-		target = get_min(a_stack, b_elem);
+		target = get_min_target(a_stack, b_elem);
 	if (target.target_pos <= target.pos / 2)
 	{
 		b_elem->ra = target.target_pos;

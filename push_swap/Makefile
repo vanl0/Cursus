@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/14 17:42:20 by ilorenzo          #+#    #+#              #
+#    Updated: 2024/01/14 17:42:24 by ilorenzo         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 
 CC = gcc -g
@@ -26,7 +38,8 @@ SRCS_LS =	main.c add_data.c \
 			LIS.c LIS_pb.c \
 			calc_moves.c calc_moves_utils.c \
 			do_moves.c do_moves_utils.c \
-			check_stack.c check_arg.c
+			check_stack.c check_arg.c \
+			small_sort.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 #	OBJS-------------------------------------------
 OBJS_DIR = ./objs/

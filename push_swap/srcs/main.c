@@ -12,8 +12,20 @@
 
 #include "../headers/push_swap.h"
 
-void	sort(t_data **a_stack, t_data **b_stack)
+void	sort(t_data **a_stack, t_data **b_stack, int argc)
 {
+	if (argc == 3)
+	{
+		sa(a_stack);
+		ft_printf("sa\n");
+		return ;
+	}
+	if (argc >= 4 && argc <= 11)
+		sort_five(a_stack, b_stack, argc);
+	else
+		lis_pb(a_stack, b_stack, find_lis(a_stack));
+	if (sorted(a_stack) && !(*b_stack))
+		return ;
 	while (*b_stack)
 	{
 		set_moves(a_stack, b_stack);
@@ -31,8 +43,8 @@ int	main(int argc, char **argv)
 	i = 1;
 	a_stack = NULL;
 	b_stack = NULL;
-	if (argc < 3)
-		return (ft_printf("Error\n"));
+	if (argc == 1)
+		return (0);
 	while (i < argc)
 	{
 		if (!add_data(&a_stack, argv[i]))
@@ -44,8 +56,7 @@ int	main(int argc, char **argv)
 		free_list(a_stack);
 		return (0);
 	}
-	lis_pb(&a_stack, &b_stack, find_lis(&a_stack));
-	sort(&a_stack, &b_stack);
+	sort(&a_stack, &b_stack, argc);
 	free_list(a_stack);
 	return (0);
 }
