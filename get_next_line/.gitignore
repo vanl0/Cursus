@@ -1,0 +1,5 @@
+.main.c
+Makefile
+a.out
+a.out.dSYM/
+test.txt
