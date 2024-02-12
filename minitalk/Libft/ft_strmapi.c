@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:20:23 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:59 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/27 18:33:01 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/29 18:20:25 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "libft.h"
 
-
-void	send_char(char c, pid_t pid)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	i;
-	int	bit;
+	char	*strmapi;
+	size_t	len;
+	size_t	i;
 
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	strmapi = malloc((len + 1) * sizeof(char));
+	if (!strmapi)
+		return (NULL);
 	i = 0;
-	while (i < 8)
+	while (i < len)
 	{
-		bit = (c >> (7 - i)) & 1;
+		strmapi[i] = (*f)(i, s[i]);
 		i++;
-		kill(pid, 30 + bit);
-		usleep(100);
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t				pid;
-	int					i;
-
-	i = 0;
-	if (argc != 3)
-	{
-		ft_printf("PID y MENSAJE necesarios\n");
-		return (0);
-	}
-	pid = (pid_t) ft_atoi(argv[1]);
-	while (argv[2][i])
-		send_char(argv[2][i++], pid);
-	return (0);
+	strmapi[i] = '\0';
+	return (strmapi);
 }

@@ -1,46 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:20:23 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:59 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/13 12:18:27 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/17 16:33:02 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "minitalk.h"
-
-
-void	send_char(char c, pid_t pid)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
-	int	bit;
+	size_t	i;
 
 	i = 0;
-	while (i < 8)
-	{
-		bit = (c >> (7 - i)) & 1;
+	while (str[i] != '\0')
 		i++;
-		kill(pid, 30 + bit);
-		usleep(100);
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t				pid;
-	int					i;
-
-	i = 0;
-	if (argc != 3)
-	{
-		ft_printf("PID y MENSAJE necesarios\n");
-		return (0);
-	}
-	pid = (pid_t) ft_atoi(argv[1]);
-	while (argv[2][i])
-		send_char(argv[2][i++], pid);
-	return (0);
+	return (i);
 }

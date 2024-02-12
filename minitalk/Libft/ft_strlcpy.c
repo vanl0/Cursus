@@ -1,46 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:20:23 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:59 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/15 16:04:42 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/29 17:59:31 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "minitalk.h"
-
-
-void	send_char(char c, pid_t pid)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
-	int	bit;
+	size_t	i;
 
 	i = 0;
-	while (i < 8)
+	if (dstsize == 0 || !dst || !src)
+		return (ft_strlen(src));
+	while (i < dstsize - 1 && src[i])
 	{
-		bit = (c >> (7 - i)) & 1;
+		dst[i] = src[i];
 		i++;
-		kill(pid, 30 + bit);
-		usleep(100);
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t				pid;
-	int					i;
-
-	i = 0;
-	if (argc != 3)
-	{
-		ft_printf("PID y MENSAJE necesarios\n");
-		return (0);
-	}
-	pid = (pid_t) ft_atoi(argv[1]);
-	while (argv[2][i])
-		send_char(argv[2][i++], pid);
-	return (0);
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

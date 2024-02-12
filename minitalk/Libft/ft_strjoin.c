@@ -1,46 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/01 12:20:23 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:59 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/22 17:14:49 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/29 18:28:31 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-#include "minitalk.h"
-
-
-void	send_char(char c, pid_t pid)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	bit;
+	char	*strjoin;
+	int		n;
+	int		i;
+	int		j;
 
+	if (!s1 || !s2)
+		return (NULL);
+	n = ft_strlen(s1) + ft_strlen(s2) + 1;
+	strjoin = malloc(n * sizeof(char));
+	if (strjoin == NULL)
+		return (NULL);
 	i = 0;
-	while (i < 8)
+	j = 0;
+	while (s1[i] != '\0')
 	{
-		bit = (c >> (7 - i)) & 1;
+		strjoin[i] = s1[i];
 		i++;
-		kill(pid, 30 + bit);
-		usleep(100);
 	}
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t				pid;
-	int					i;
-
-	i = 0;
-	if (argc != 3)
+	while (s2[j] != '\0')
 	{
-		ft_printf("PID y MENSAJE necesarios\n");
-		return (0);
+		strjoin[i++] = s2[j++];
 	}
-	pid = (pid_t) ft_atoi(argv[1]);
-	while (argv[2][i])
-		send_char(argv[2][i++], pid);
-	return (0);
+	strjoin[i] = '\0';
+	return (strjoin);
 }
