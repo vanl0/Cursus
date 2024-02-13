@@ -98,11 +98,11 @@ int	calc_rr(t_data *elem)
 void	set_moves(t_data **a_stack, t_data **b_stack)
 {
 	int		b_len;
-	int		a_len;
+	//int		a_len;
 	int		i;
 	t_data	*b_elem;
 
-	a_len = get_stack_len(a_stack);
+	//a_len = get_stack_len(a_stack);
 	b_len = get_stack_len(b_stack);
 	b_elem = *b_stack;
 	i = 0;

@@ -35,7 +35,7 @@ $(SERVER): $(SERV_OBJS) $(CLIENT) $(PRINTF) $(LIBFT) $(HEADER) Makefile
 	$(CC) $(FLAGS) $< $(PRINTF) $(LIBFT) -o $@ 
 
 $(CLIENT): $(CLIENT_OBJS) $(PRINTF) $(LIBFT) Makefile
-	$(CC) $(FLAGS) $(PRINTF) $(LIBFT) $< -o $@
+	$(CC) $(FLAGS) $(CLIENT_OBJS) $(PRINTF) $(LIBFT) -o $@
 
 $(SERV_OBJS): $(SERV_SRCS) $(OBJS_DIR)
 	$(CC) -c $(FLAGS) $< -o $@

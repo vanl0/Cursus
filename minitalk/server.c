@@ -31,24 +31,27 @@ void	gotsign(int signal)
 {
 	static int	bit_pos = 0;
 	static char	tchar = 0;
-	static char	*string = NULL;
+	//static char	*string = NULL;
 
 	if (signal == SIGUSR2)
 	{
 		tchar |= (1 << (7 - bit_pos));
 	}
+
 	bit_pos++;
+	if (bit_pos == 8 && tchar == '\0')
+	{
+		//write(1, string, ft_strlen(string));
+		//free(string);
+		//string = NULL;
+		bit_pos = 0;
+	}						
 	if (bit_pos == 8)
 	{
-		string = ft_charjoin(string, tchar);
-		//write(1, &tchar, 1);
+		//string = ft_charjoin(string, tchar);
+		write(1, &tchar, 1);
 		bit_pos = 0;
 		tchar = 0;
-	}
-	if (tchar == '\0')
-	{
-		write(1, string, ft_strlen(string));
-		free(string);
 	}
 }
 
