@@ -4,8 +4,7 @@ void    create_philo(t_philo **table, t_params *params)
 {
     int     i;
     t_philo *philosopher_i;
-    printf("1\n");
-
+    
     i = 0;
     while(i < params->number_of_philosophers)
     {

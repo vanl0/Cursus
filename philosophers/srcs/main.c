@@ -17,10 +17,11 @@
 
 t_params    params_init(char **argv)
 {
-    t_params params;
+    t_params    params;
     params.number_of_philosophers = ft_atoi(argv[1]);
     params.th = malloc((params.number_of_philosophers) * sizeof(pthread_t));
-    params.time = malloc(sizeof (long int));
+    params.time = malloc(sizeof(long int));
+    //*(params.time) = 0;
     return (params);
 }
 
@@ -31,8 +32,8 @@ void    *philosopher(void *philo)
     
     //alive = 1;
     my_philo = (t_philo *)philo;
-    /*printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n",\
-     my_philo->left->num, my_philo->num, my_philo->right->num, *(my_philo->time));*/
+    printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n",\
+     my_philo->left->num, my_philo->num, my_philo->right->num, *(my_philo->time));
 
     return ((void *) philo);
 }
@@ -41,11 +42,9 @@ int	main(int argc, char **argv)
 {
     t_params    params;
     pthread_t   clock_th;
-    int         i;
     t_philo     *table;
 
     table = NULL;
-    i = 0;
 	if (argc > 2)
 		return (printf("invalid arg\n"));
     params = params_init(argv);

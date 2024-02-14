@@ -16,7 +16,7 @@ void    *ft_clock(void *counter)
         gettimeofday(&tv, NULL);
         t = tv.tv_sec * 1000 + tv.tv_usec / 1000 - t0;
         *timer = t;
-        printf("t: %ld, %p\n", *timer, timer);
+        //printf("t: %ld, %p\n", *timer, timer);
         usleep(1000);
     }
     return (counter);
