@@ -6,12 +6,11 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 12:20:23 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/06 13:43:59 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/02/15 12:58:35 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-
 
 void	send_char(char c, pid_t pid)
 {
@@ -24,15 +23,24 @@ void	send_char(char c, pid_t pid)
 		bit = (c >> (7 - i)) & 1;
 		i++;
 		kill(pid, 30 + bit);
-		usleep(100);
+		usleep(300);
 	}
+}
+
+void	check(int sign)
+{
+	if (sign == SIGUSR1)
+		write(1, "Recibido ✓✓\n", 17);
 }
 
 int	main(int argc, char **argv)
 {
 	pid_t				pid;
+	struct sigaction	sa;
 	int					i;
 
+	sa.sa_handler = &check;
+	sigaction(SIGUSR1, &sa, NULL);
 	i = 0;
 	if (argc != 3)
 	{
@@ -42,5 +50,6 @@ int	main(int argc, char **argv)
 	pid = (pid_t) ft_atoi(argv[1]);
 	while (argv[2][i])
 		send_char(argv[2][i++], pid);
+	send_char('\0', pid);
 	return (0);
 }

@@ -14,42 +14,51 @@
 char	*ft_charjoin(char *str, char c)
 {
 	char	*charjoin;
-	char	*charstr;
+	int		len;
+	int		i;
 
-	charstr = malloc(2 * sizeof(char));
-	charstr[0] = c;
-	charstr[1] = 0;
+	i = 0;
 	if (!str)
-		return (charstr);
-	charjoin = ft_strjoin(str, charstr);
+	{
+		charjoin = malloc(2 * sizeof(char));
+		charjoin[0] = c;
+		charjoin[1] = 0;
+		return (charjoin);
+	}
+	len = ft_strlen(str);
+	charjoin = malloc((len + 2) * sizeof(char));
+	while (i < len)
+	{
+		charjoin[i] = str[i];
+		i++;
+	}
+	charjoin[i] = c;
+	charjoin[i + 1] = '\0';
 	free(str);
-	free(charstr);
 	return (charjoin);
 }
 
-void	gotsign(int signal)
+void	gotsign(int signal, siginfo_t *info, void *context)
 {
 	static int	bit_pos = 0;
 	static char	tchar = 0;
-	//static char	*string = NULL;
+	static char	*string = NULL;
 
+	context = NULL;
 	if (signal == SIGUSR2)
-	{
 		tchar |= (1 << (7 - bit_pos));
-	}
-
 	bit_pos++;
 	if (bit_pos == 8 && tchar == '\0')
 	{
-		//write(1, string, ft_strlen(string));
-		//free(string);
-		//string = NULL;
+		write(1, string, ft_strlen(string));
+		free(string);
+		string = NULL;
 		bit_pos = 0;
-	}						
+		kill(info->si_pid, SIGUSR1);
+	}
 	if (bit_pos == 8)
 	{
-		//string = ft_charjoin(string, tchar);
-		write(1, &tchar, 1);
+		string = ft_charjoin(string, tchar);
 		bit_pos = 0;
 		tchar = 0;
 	}
@@ -59,9 +68,9 @@ int	main(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_handler = gotsign;
+	sa.sa_sigaction = &gotsign;
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
+	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_printf("PID: %d\n", getpid());
