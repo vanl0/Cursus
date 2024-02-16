@@ -12,6 +12,7 @@
 
 #include "minitalk.h"
 
+int		got_check = 0;
 void	send_char(char c, pid_t pid)
 {
 	int	i;
@@ -23,7 +24,7 @@ void	send_char(char c, pid_t pid)
 		bit = (c >> (7 - i)) & 1;
 		i++;
 		kill(pid, 30 + bit);
-		usleep(300);
+		usleep(100);
 	}
 }
 
@@ -31,6 +32,7 @@ void	check(int sign)
 {
 	if (sign == SIGUSR1)
 		write(1, "Recibido ✓✓\n", 17);
+	got_check = 1;
 }
 
 int	main(int argc, char **argv)
@@ -51,5 +53,7 @@ int	main(int argc, char **argv)
 	while (argv[2][i])
 		send_char(argv[2][i++], pid);
 	send_char('\0', pid);
+	while(!got_check)
+		usleep(10);
 	return (0);
 }
