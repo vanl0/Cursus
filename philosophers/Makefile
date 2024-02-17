@@ -14,21 +14,30 @@ NAME = philo
 CC = gcc -g -pthread
 FLAGS = -Wall -Werror -Wextra
 
-HEADER = ./philo.h
-SRCS =	main.c \
-		ft_atoi.c
-OBJS = $(SRCS:.c=.o)
+HEADER = ./header/philo.h
+
+SRCS_DIR = ./srcs/
+SRCS_LS =	main.c \
+		ft_atoi.c \
+		table_utils.c \
+		clock.c
+SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
+
+OBJS_DIR = ./objs/
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
 
 all: $(NAME)
  
-$(NAME): $(OBJS) $(HEADER) Makefile
+$(NAME): $(OBJS) $(HEADER) Makefile $(OBJS_DIR)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c $(HEADER)
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER) $(OBJS_DIR)
 	$(CC) -c $(FLAGS) $< -o $@
 
+$(OBJS_DIR):
+	mkdir $@
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJS_DIR)
 
 fclean: clean
 	rm -rf $(NAME)

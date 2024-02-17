@@ -30,7 +30,21 @@ typedef struct  s_params
     int number_of_times_each_philosopher_must_eat;
 }   t_params;
 
+typedef struct s_philo
+{
+    t_params            params;
+    int                 num;
+    long int           time;
+    struct s_philo     *left;
+    struct s_philo     *right;
+}   t_philo;
+
 //UTILS-----------------------
-int	ft_atoi(const char *str);
+int         ft_atoi(const char *str);
+void    *ft_clock(void *table_ptr);
+void    set_time(t_philo **table, long int time);
+//TABLE-----------------------
+t_philo    *add_philo(t_philo **table, t_params params, int num);
+void        free_table(t_philo **table);
 
 #endif

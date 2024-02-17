@@ -1,41 +1,5 @@
-#include "./philo.h"
+#include "../header/philo.h"
 
-typedef struct s_philo
-{
-    t_params            params;
-    int                 num;
-    struct s_philo     *left;
-    struct s_philo     *right;
-}   t_philo;
-
-t_philo    *add_philo(t_philo **table, t_params params, int num)
-{
-    t_philo *new_philo;
-    t_philo *last_philo;
-
-    new_philo = malloc(sizeof(t_philo));
-    new_philo->params = params;
-    new_philo->num = num;
-
-    if (!(*table))
-    {
-        new_philo->left = NULL;
-        new_philo->right = NULL;
-        *table = new_philo;
-        return (new_philo);
-    }
-    if (!((*table)->left))
-    {
-        (*table)->left = new_philo;
-        last_philo = *table;
-    }
-    else
-        last_philo = (*table)->left;
-    last_philo->right = new_philo;
-    new_philo->left = last_philo;
-    new_philo->right = *table;
-    return (new_philo);
-}
 
 t_params    params_init(char **argv)
 {
@@ -58,36 +22,19 @@ t_params    params_init(char **argv)
     return (params);
 }
 
-void    free_table(t_philo **table)
-{
-    t_philo *next;
-    t_philo *current;
-
-    current = *table;
-    next = current->right;
-    free(current);
-    current = next;
-    while (current != *table)
-    {
-        next = current->right;
-        printf("free: %d\n", current->num);
-        free(current);
-        current = next;
-    }
-    *table = NULL;
-}
 void    *philosopher(void *philo)
 {
     t_philo    *my_philo;
 
     my_philo = (t_philo *)philo;
-    printf("Hola, aqui filosofo %d, derecha: %d, izquierda: %d\n", my_philo->num, my_philo->right->num, my_philo->left->num);
+    printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n", my_philo->left->num, my_philo->num, my_philo->right->num, my_philo->time);
     return ((void *) philo);
 }
 
 int	main(int argc, char **argv)
 {
     t_params    params;
+    pthread_t   clock_th;
     int         i;
     t_philo     *table;
     t_philo     *new_philo;
@@ -102,14 +49,15 @@ int	main(int argc, char **argv)
         add_philo(&table, params, i);
         i++;
     }
+    pthread_create(&clock_th, NULL, ft_clock, &table);
     i = 0;
     new_philo = table;
     while (i < params.number_of_philosophers)
     {
         pthread_create(&(params.th[i]), NULL, philosopher, new_philo);
         new_philo = new_philo->right;
-        usleep(100);
         i++;
+        usleep(10000);
     }
     i = 0;
     while (i < params.number_of_philosophers)
@@ -118,7 +66,9 @@ int	main(int argc, char **argv)
         printf("Philosopher %d terminado\n", i);
         i++;
     }
-    free(params.th);
+    //table = NULL;
     free_table(&table);
+    pthread_join(clock_th, NULL);
+    free(params.th);
     return (0);
 }
