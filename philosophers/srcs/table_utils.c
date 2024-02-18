@@ -8,6 +8,7 @@ t_philo    *add_philo(t_philo **table, t_params params, int num)
     new_philo = malloc(sizeof(t_philo));
     new_philo->params = params;
     new_philo->num = num;
+    new_philo->time = params.time;
 
     if (!(*table))
     {

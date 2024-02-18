@@ -20,6 +20,7 @@ SRCS_DIR = ./srcs/
 SRCS_LS =	main.c \
 		ft_atoi.c \
 		table_utils.c \
+		thread_utils.c \
 		clock.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 
@@ -28,7 +29,7 @@ OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
 
 all: $(NAME)
  
-$(NAME): $(OBJS) $(HEADER) Makefile $(OBJS_DIR)
+$(NAME): $(OBJS) $(HEADER) Makefile
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER) $(OBJS_DIR)

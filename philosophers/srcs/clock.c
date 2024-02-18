@@ -1,36 +1,23 @@
 #include "../header/philo.h"
 
-void    set_time(t_philo **table, long int time)
+void    *ft_clock(void *counter)
 {
-    t_philo *current;
-
-    current = *table;
-    current->time = time;
-    current = current->right;
-    while (current != (*table))
-    {
-        current->time = time;
-        current = current->right;
-    }
-}
-
-void    *ft_clock(void *table_ptr)
-{
-    t_philo **table;
+    long int        *timer;
     struct timeval  tv;
     long int        t0;
     long int        t;
 
-    table = (t_philo **)table_ptr;
+    timer = (long int *)counter;
+    *timer = 0;
     gettimeofday(&tv, NULL);
     t0 = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-    while (*table)
+    while (1)
     {
         gettimeofday(&tv, NULL);
         t = tv.tv_sec * 1000 + tv.tv_usec / 1000 - t0;
-        set_time(table, t);
-        usleep(100);
-        //printf("t: %ld\n", t);
+        *timer = t;
+        printf("t: %ld, %p\n", *timer, timer);
+        usleep(1000);
     }
-    return (table_ptr);
+    return (counter);
 }

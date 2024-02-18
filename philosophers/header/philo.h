@@ -28,17 +28,21 @@ typedef struct  s_params
     int time_to_eat;
     int time_to_sleep;
     int number_of_times_each_philosopher_must_eat;
+    long int    *time;
 }   t_params;
 
 typedef struct s_philo
 {
     t_params            params;
     int                 num;
-    long int           time;
+    long int           *time;
     struct s_philo     *left;
     struct s_philo     *right;
 }   t_philo;
 
+void    *philosopher(void *philo);
+void    create_philo(t_philo **table, t_params *params);
+void    close_threads(t_params *params);
 //UTILS-----------------------
 int         ft_atoi(const char *str);
 void    *ft_clock(void *table_ptr);
