@@ -21,20 +21,25 @@ t_params    params_init(char **argv)
     params.number_of_philosophers = ft_atoi(argv[1]);
     params.th = malloc((params.number_of_philosophers) * sizeof(pthread_t));
     params.time = malloc(sizeof(long int));
-    //*(params.time) = 0;
+    *(params.time) = 0;
     return (params);
 }
 
 void    *philosopher(void *philo)
 {
     t_philo    *my_philo;
-    //char        alive;
-    
-    //alive = 1;
+    int         alive;
+    int         fork;
+
+    fork = 1;
+    alive = 1;
     my_philo = (t_philo *)philo;
     printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n",\
      my_philo->left->num, my_philo->num, my_philo->right->num, *(my_philo->time));
+    while (alive)
+    {
 
+    }
     return ((void *) philo);
 }
 
@@ -53,5 +58,6 @@ int	main(int argc, char **argv)
     create_philo(&table, &params);
     close_threads(&params);
     free_table(&table);
+    free(params.time);
     return (0);
 }

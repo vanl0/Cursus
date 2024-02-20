@@ -13,8 +13,8 @@
 SERVER = server
 CLIENT = client
 
-CC = gcc
-FLAGS = -Wall -Wextra -Werror
+CC = clang
+FLAGS = -Wall -Wextra
 
 SERV_SRCS = server.c
 SERV_OBJS = $(SERV_SRCS:.c=.o)
