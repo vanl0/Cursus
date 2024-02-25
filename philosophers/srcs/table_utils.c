@@ -9,6 +9,7 @@ t_philo    *add_philo(t_philo **table, t_params params, int num)
     new_philo->params = params;
     new_philo->num = num;
     new_philo->time = params.time;
+    new_philo->alive = params.alive;
 
     if (!(*table))
     {

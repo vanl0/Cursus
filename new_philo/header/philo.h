@@ -29,6 +29,7 @@ typedef struct  s_params
     int         time_to_sleep;
     int         number_of_times_each_philosopher_must_eat;
     long int    t0;
+    int         *death_report;
 }   t_params;
 
 typedef struct s_philo
