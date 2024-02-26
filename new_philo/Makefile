@@ -1,6 +1,6 @@
 NAME = philo
 CC = gcc
-CFLAGS = -g -pthread -Wall -Werror -Wextra
+CFLAGS = -g -pthread -Wall -Wextra
 
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
@@ -28,9 +28,9 @@ fclean: clean
 	rm -f $(NAME)
 
 leaks: $(NAME)
-	valgrind --leak-check=full ./$(NAME) 5
+	valgrind --leak-check=full ./$(NAME) 5 400 200 200
 do: 
-	./philo 5
+	./philo 5 400 200 200
 
 re: fclean all
 

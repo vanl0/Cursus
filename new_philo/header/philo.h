@@ -36,9 +36,9 @@ typedef struct s_philo
 {
     t_params            params;
     int                 num;
-    int                 alive;
     pthread_mutex_t     fork;
     long int            last_meal;
+    int                 n_meals;
     struct s_philo     *left;
     struct s_philo     *right;
 }   t_philo;
@@ -49,6 +49,12 @@ void        create_philo(t_philo **table, t_params *params);
 t_philo    *add_philo(t_philo **table, t_params params, int num);
 void        close_threads(t_params *params);
 void        free_table(t_philo **table);
+//PHILO
+void        *dead_philo(t_philo *my_philo);
+void        take_fork(t_philo *my_philo, pthread_mutex_t *fork);
+void        eat(t_philo *my_philo);
+void        check_n_meals(t_philo **table);
+
 //TIME
 long int    get_time(long int t0);
 //INIT
