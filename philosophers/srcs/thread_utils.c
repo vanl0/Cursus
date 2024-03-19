@@ -12,18 +12,6 @@
 
 #include "../header/philo.h"
 
-void	create_table(t_philo **table, t_params *params)
-{
-	int	i;
-
-	i = 0;
-	while(i < params->number_of_philosophers)
-	{
-		add_philo(table, *params, i);
-		i++;
-	}
-}
-
 void	start_threads(t_philo **table, t_params *params) 
 {
 	int		i;
@@ -36,6 +24,7 @@ void	start_threads(t_philo **table, t_params *params)
 		pthread_create(&(params->th[i]), NULL, philosopher, philosopher_i);
 		philosopher_i = philosopher_i->right;
 		i++;
+		usleep(1);
 	}
 }
 

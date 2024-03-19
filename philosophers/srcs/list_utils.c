@@ -12,6 +12,18 @@
 
 #include "../header/philo.h"
 
+void	create_table(t_philo **table, t_params *params)
+{
+	int	i;
+
+	i = 0;
+	while(i < params->number_of_philosophers)
+	{
+		add_philo(table, *params, i);
+		i++;
+	}
+}
+
 t_philo	*add_philo(t_philo **table, t_params params, int num)
 {
 	t_philo	*new_philo;

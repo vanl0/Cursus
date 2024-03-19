@@ -45,10 +45,13 @@ typedef struct s_philo
 
 //UTILS
 int         ft_atoi(char *str);
+void        create_table(t_philo **table, t_params *params);
+void	    start_threads(t_philo **table, t_params *params);
 void        create_philo(t_philo **table, t_params *params);
 t_philo    *add_philo(t_philo **table, t_params params, int num);
 void        close_threads(t_params *params);
 void        free_table(t_philo **table);
+void        print_action(t_philo *my_philo, char *msg);
 //PHILO
 void        *dead_philo(t_philo *my_philo);
 void        take_fork(t_philo *my_philo, pthread_mutex_t *fork);
