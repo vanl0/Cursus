@@ -1,42 +1,46 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   thread_utils.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 16:27:36 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/25 16:39:24 by ilorenzo         ###   ########.fr       */
-/*                                                                            */
+/*																			  */
+/*														  :::	   ::::::::   */
+/*	 thread_utils.c										:+:		 :+:	:+:   */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: ilorenzo <ilorenzo@student.42barcel>		+#+  +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2024/02/25 16:27:36 by ilorenzo		   #+#	  #+#			  */
+/*	 Updated: 2024/02/25 16:39:24 by ilorenzo		  ###	########.fr		  */
+/*																			  */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
 
-void	start_threads(t_philo **table, t_params *params) 
+void	start_threads(t_philo **table, t_params *params)
 {
 	int		i;
+	int		j;
 	t_philo	*philosopher_i;
 
 	i = 0;
+	j = 1;
 	philosopher_i = *table;
 	while (i < params->number_of_philosophers)
 	{
 		pthread_create(&(params->th[i]), NULL, philosopher, philosopher_i);
-		philosopher_i = philosopher_i->right;
-		i++;
+		philosopher_i = philosopher_i->right->right;
+		i += 2;
+		usleep(1);
+	}
+	philosopher_i = (*table)->right;
+	while (j < params->number_of_philosophers)
+	{
+		pthread_create(&(params->th[j]), NULL, philosopher, philosopher_i);
+		philosopher_i = philosopher_i->right->right;
+		j += 2;
 		usleep(1);
 	}
 }
 
-void	create_philo(t_philo **table, t_params *params)
-{
-	create_table(table, params);
-	start_threads(table, params);
-}
-
 void	close_threads(t_params *params)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < params->number_of_philosophers)
@@ -46,5 +50,5 @@ void	close_threads(t_params *params)
 		i++;
 	}
 	free(params->th);
-    free(params->death_report);
+	free(params->death_report);
 }

@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   table_utils.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 16:25:45 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/25 16:27:11 by ilorenzo         ###   ########.fr       */
-/*                                                                            */
+/*																			  */
+/*														  :::	   ::::::::   */
+/*	 table_utils.c										:+:		 :+:	:+:   */
+/*													  +:+ +:+		  +:+	  */
+/*	 By: ilorenzo <ilorenzo@student.42barcel>		+#+  +:+	   +#+		  */
+/*												  +#+#+#+#+#+	+#+			  */
+/*	 Created: 2024/02/25 16:25:45 by ilorenzo		   #+#	  #+#			  */
+/*	 Updated: 2024/02/25 16:27:11 by ilorenzo		  ###	########.fr		  */
+/*																			  */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
@@ -17,7 +17,7 @@ void	create_table(t_philo **table, t_params *params)
 	int	i;
 
 	i = 0;
-	while(i < params->number_of_philosophers)
+	while (i < params->number_of_philosophers)
 	{
 		add_philo(table, *params, i);
 		i++;
