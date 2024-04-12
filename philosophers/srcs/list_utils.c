@@ -34,6 +34,7 @@ t_philo	*add_philo(t_philo **table, t_params params, int num)
 	new_philo->num = num;
 	pthread_mutex_init(&(new_philo->fork), NULL);
 	new_philo->last_meal = 0;
+	new_philo->n_meals = 0;
 	if (!(*table))
 	{
 		new_philo->left = NULL;
@@ -59,14 +60,14 @@ void	free_table(t_philo **table)
 
 	current = *table;
 	next = current->right;
-	printf("free: %d\n", current->num);
+	//printf("free: %d\n", current->num);
 	pthread_mutex_destroy(&(current->fork));
 	free(current);
 	current = next;
 	while (current != *table)
 	{
 		next = current->right;
-		printf("free: %d\n", current->num);
+		//printf("free: %d\n", current->num);
 		pthread_mutex_destroy(&(current->fork));
 		free(current);
 		current = next;

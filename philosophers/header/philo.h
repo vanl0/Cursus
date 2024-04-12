@@ -20,6 +20,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
+
 typedef struct s_params
 {
 	pthread_t	*th;
@@ -30,6 +31,7 @@ typedef struct s_params
 	int			number_of_times_each_philosopher_must_eat;
 	long int	t0;
 	int			*death_report;
+	pthread_mutex_t	write;
 }	t_params;
 
 typedef struct s_philo
@@ -54,9 +56,9 @@ void		free_table(t_philo **table);
 void		print_action(t_philo *my_philo, char *msg);
 //PHILO
 void		*dead_philo(t_philo *my_philo);
-void		take_fork(t_philo *my_philo, pthread_mutex_t *fork, int flg);
+void		take_fork(t_philo *my_philo, pthread_mutex_t *fork);
 void		eat(t_philo *my_philo);
-void		check_n_meals(t_philo **table);
+int			check_n_meals(t_philo *my_philo);
 
 //TIME
 long int	get_time(long int t0);
