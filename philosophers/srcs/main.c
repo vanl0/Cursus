@@ -12,100 +12,58 @@
 
 #include "../header/philo.h"
 
-t_params	params_init(char **argv)
-{
-	t_params		params;
-	struct timeval	tv;
+void print_t_val(t_val val) {
+    printf("n_philo: %d\n", val.n_philo);
+    printf("die: %d\n", val.die);
+    printf("eat: %d\n", val.eat);
+    printf("sleep: %d\n", val.sleep);
+    printf("max_meals: %d\n", val.max_meals);
+    printf("t0: %ld\n", val.t0);
+}
 
-	params.number_of_philosophers = ft_atoi(argv[1]);
-	params.time_to_die = ft_atoi(argv[2]);
-	params.time_to_eat = ft_atoi(argv[3]) * 1000;
-	params.time_to_sleep = ft_atoi(argv[4]) * 1000;
-	if (argv[5])
-		params.number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-	else
-		params.number_of_times_each_philosopher_must_eat = -1;
+void	print_list(t_philo *first)
+{
+	t_philo *philo_i;
 	
-	params.th = malloc((params.number_of_philosophers) * sizeof(pthread_t));
-	params.death_report = malloc(sizeof(int));
-	*(params.death_report) = -1;
-	gettimeofday(&tv, NULL);
-	params.t0 = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	pthread_mutex_init(&params.write, NULL);
-	return (params);
-}
-
-void	*philosopher(void *philo)
-{
-	t_philo	*my_philo;
-
-	my_philo = (t_philo *)philo;
-	//printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n", my_philo->left->num, my_philo->num, my_philo->right->num, get_time(my_philo->params.t0));
-	while (*(my_philo->params.death_report) < 0)
+	printf("philo %d, right: %d\n", first->num, first->right->num);
+	if (first->right == first)
+		return ;
+	philo_i = first->right;
+	while(philo_i != first)
 	{
-		take_fork(my_philo, &my_philo->fork);
-		take_fork(my_philo, &my_philo->left->fork);
-		eat(my_philo);
+		printf("philo %d, right: %d\n", philo_i->num, philo_i->right->num);
+		philo_i = philo_i->right;
 	}
-	return (NULL);
+	return;
 }
 
-int		check_n_meals(t_philo *my_philo)
+t_val	set_val(int ac, char **av)
 {
-	int	n_meals;
-	int	n_philo;
-	int	i;
+	t_val	val;
 
-	n_meals = my_philo->params.number_of_times_each_philosopher_must_eat;
-	n_philo = my_philo->params.number_of_philosophers;
-	i = 0;
-	while (i < n_philo)
-	{
-		if (my_philo->n_meals >= n_meals)
-			return (1);
-		my_philo = my_philo->right;
-		i++;
-	}
-	return (0);
+	val.n_philo = ft_atoi(av[1]);
+	val.die = ft_atoi(av[2]);
+	val.eat = ft_atoi(av[3]);
+	val.sleep = ft_atoi(av[4]);
+	if (ac > 5)
+		val.max_meals = ft_atoi(av[5]);
+	else
+		val.max_meals = 0;
+	val.t0 = get_time(0);
+	return (val);
 }
 
-void	*death_ctrl(void *table)
-{
-	t_philo	*my_philo;
-	int		meals_flg;
-
-	meals_flg = 0;
-	my_philo = (t_philo *)table;
-	while (*(my_philo->params.death_report) < 0 && !meals_flg)
-	{
-		if (*(my_philo->params.death_report) >= 0)
-			printf("%d %d died\n", (int)get_time(my_philo->params.t0), *(my_philo->params.death_report));
-		if (my_philo->params.number_of_times_each_philosopher_must_eat)
-			meals_flg = check_n_meals(my_philo);
-	}
-	//write(1,"a", 1);
-	*(my_philo->params.death_report) = 0;
-	return (NULL);
-}
-
-int	main(int argc, char **argv)
+int main(int ac, char **av)
 {
 	t_params	params;
-	t_philo		*table;
-	pthread_t	control;
 
-	table = NULL;
-	if ((argc < 5 || argc > 6) || (argv[5] && ft_atoi(argv[5]) < 1))
-		return (printf("invalid args\n"));
-	params = params_init(argv);
-	//table = malloc(sizeof(t_philo *));
-	create_table(&table, &params);
-	pthread_create(&control, NULL, death_ctrl, (void *)(&params));
-	start_threads(&table, &params);
-	close_threads(&params);
-	pthread_join(control, NULL);
-    free_table(&table);
+	if (ac < 5 || ac > 6)
+		return (printf("Error\n"));
+	params.val = set_val(ac, av);
+	set_table(&params.table, params.val);
+	
+	//print_list(params.table);
+
+	
 	return (0);
 }
-
-//printf("izquierda: %d | philo %d | derecha: %d | tiempo %ld\n", my_philo->left->num, my_philo->num, my_philo->right->num, get_time(my_philo->params.t0));

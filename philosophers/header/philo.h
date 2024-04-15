@@ -20,50 +20,41 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-
-typedef struct s_params
+typedef struct s_val
 {
-	pthread_t	*th;
-	int			number_of_philosophers;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			number_of_times_each_philosopher_must_eat;
+	int			die;
+	int			eat;
+	int 		sleep;
+	int			n_philo;
+	int			max_meals;
 	long int	t0;
-	int			*death_report;
-	pthread_mutex_t	write;
-}	t_params;
+}	t_val;
 
 typedef struct s_philo
 {
-	t_params			params;
+	t_val				val;
 	int					num;
 	pthread_mutex_t		fork;
 	long int			last_meal;
-	int					n_meals;
-	struct s_philo		*left;
+	int					n_meal;
+	//struct s_philo		*left;
 	struct s_philo		*right;
 }	t_philo;
 
-//UTILS
-int			ft_atoi(char *str);
-void		create_table(t_philo **table, t_params *params);
-void		start_threads(t_philo **table, t_params *params);
-void		create_philo(t_philo **table, t_params *params);
-t_philo		*add_philo(t_philo **table, t_params params, int num);
-void		close_threads(t_params *params);
-void		free_table(t_philo **table);
-void		print_action(t_philo *my_philo, char *msg);
-//PHILO
-void		*dead_philo(t_philo *my_philo);
-void		take_fork(t_philo *my_philo, pthread_mutex_t *fork);
-void		eat(t_philo *my_philo);
-int			check_n_meals(t_philo *my_philo);
+typedef struct s_params
+{
+	t_val		val;
+	t_philo		*table;
+	pthread_t	*th;
+}	t_params;
 
+
+//TABLE
+t_philo		*add_philo(t_philo **table, t_val val, int i);
+void		set_table(t_philo **table, t_val val);
 //TIME
 long int	get_time(long int t0);
-//INIT
-t_params	params_init(char **argv);
+//UTILS
+int			ft_atoi(char *str);
 
-void		*philosopher(void *philo);
 #endif

@@ -20,7 +20,7 @@ HEADER = ./header/philo.h
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
 
-SRCS_LS = main.c thread_utils.c list_utils.c ft_atoi.c eat_n_die.c
+SRCS_LS = main.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
