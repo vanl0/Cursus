@@ -9,7 +9,7 @@
 /*	 Updated: 2024/02/25 16:27:11 by ilorenzo		  ###	########.fr		  */
 /*																			  */
 /* ************************************************************************** */
-
+//printf("new_philo: %d, %p right: %p\n", philo_new->num, philo_new, philo_new->right);
 #include "../header/philo.h"
 
 t_philo *set_philo(t_val val, int i)
@@ -36,16 +36,12 @@ t_philo *add_philo(t_philo **table, t_val val, int i)
 	{
 		philo_new->right = philo_new;
 		*table = philo_new;
-		//printf("new_philo: %d, %p right: %p\n", philo_new->num, philo_new, philo_new->right);
 		return (*table);
 	}
 	while (philo_i->right != *table)
-	{
 		philo_i = philo_i->right;
-	}
 	philo_new->right = *table;
 	philo_i->right = philo_new;
-	//printf("new_philo: %d, %p right: %p\n", philo_new->num, philo_new, philo_new->right);
 	return (*table);
 }
 
@@ -59,5 +55,22 @@ void set_table(t_philo **table, t_val val)
 		add_philo(table, val, i);
 		i++;
 	}
-	
+}
+
+void	free_table(t_philo *table)
+{
+	t_philo	*philo_i;
+	t_philo *philo_free;
+
+	philo_free = table->right;
+	philo_i = table->right->right;
+	while(philo_free != table)
+	{
+		pthread_mutex_destroy(&philo_free->fork);
+		free(philo_free);
+		philo_free = philo_i;
+		philo_i = philo_i->right;
+	}
+	free(table);
+	return ;
 }

@@ -42,11 +42,12 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+re: fclean all
 
 do: 
 	./philo 5 400 200 200
-
-re: fclean all
+leaks:
+	leaks -atE -- ./philo 5 4 4 4 5
 
 .PHONY: all clean fclean re do
 	
