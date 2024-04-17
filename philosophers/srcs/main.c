@@ -54,7 +54,7 @@ t_val	set_val(int ac, char **av)
 	else
 		val.max_meals = 0;
 	val.t0 = get_time(0);
-	pthread_mutex_init(&val.write, NULL);
+	pthread_mutex_init(&val.write_mutex, NULL);
 	val.th = malloc(val.n_philo * sizeof(pthread_t));
 	return (val);
 }
@@ -85,8 +85,11 @@ int main(int ac, char **av)
 	params.val = set_val(ac, av);
 	params.table = NULL;
 	set_table(&params.table, params.val);
-	start_threads(params.table, &params);
-	close_threads(params.val);
+	//print_list(params.table);
+	//start_threads(params.table, &params);
+	//close_threads(params.val);
 	free_table(params.table);
+	pthread_mutex_destroy(&params.val.write_mutex);
+	free(params.val.th);
 	return (0);
 }

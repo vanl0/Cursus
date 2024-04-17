@@ -14,9 +14,9 @@
 
 void	print_action(t_philo *philo, char *msg)
 {
-    pthread_mutex_lock(&(philo->val.write));
+    pthread_mutex_lock(&(philo->val.write_mutex));
 	printf("%ld %d %s\n", get_time(philo->val.t0), philo->num, msg);
-    pthread_mutex_unlock(&(philo->val.write));
+    pthread_mutex_unlock(&(philo->val.write_mutex));
 	return ;
 }
 

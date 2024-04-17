@@ -27,6 +27,10 @@ void	*philosopher(void	*void_philo)
 
 	philo = (t_philo *)void_philo;
 	printf("Aqui philo %d\n", philo->num);
+	//take_fork(&philo->fork, philo);
+	//take_fork(&philo->right->fork, philo);
+	//eat(philo);
+
 	return (NULL);
 }
 
@@ -67,6 +71,6 @@ void	close_threads(t_val val)
 		i++;
 	}
 	free(val.th);
-	pthread_mutex_destroy(&val.write);
+	pthread_mutex_destroy(&val.write_mutex);
 	return ;
 }

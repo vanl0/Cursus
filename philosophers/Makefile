@@ -48,6 +48,8 @@ do:
 	./philo 5 400 200 200
 leaks:
 	leaks -atE -- ./philo 5 4 4 4 5
+valg:
+	valgrind --leak-check=full ./philo 5 4 4 4 5
 
 .PHONY: all clean fclean re do
 	
