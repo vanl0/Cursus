@@ -29,10 +29,9 @@ typedef struct s_val
 	int				max_meals;
 	long int		t0;
 	pthread_t		*th;
-	int				death_flg;
+	int				*death_flg;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	write_mutex;
-
 }	t_val;
 
 typedef struct s_philo

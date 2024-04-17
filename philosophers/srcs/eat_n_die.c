@@ -30,10 +30,20 @@ void    eat(t_philo *philo)
 {
     philo->last_meal = get_time(philo->val.t0);
     print_action(philo, "is eating");
+    philo->last_meal = get_time(philo->val.t0);
+    philo->n_meal++;
     usleep(philo->val.eat);
     pthread_mutex_unlock(&philo->fork);
     pthread_mutex_unlock(&philo->right->fork);
     print_action(philo, "is sleeping");
     usleep(philo->val.sleep);
     print_action(philo, "is thinking");
+}
+
+void    die(t_philo *philo)
+{
+    pthread_mutex_lock(&philo->val.write_mutex);
+    pthread_mutex_lock(&philo->val.death_mutex);
+    *philo->val.death_flg = philo->num;
+    printf("%ld %d has died\n", get_time(philo->val.t0), philo->num);
 }
