@@ -41,6 +41,9 @@ int	meals_ctrl(t_philo *table)
 		philo_i = philo_i->right;
 		i++;
 	}
+	pthread_mutex_lock(&philo_i->val.death_mutex);
+	*philo_i->val.death_flg = 0;
+	pthread_mutex_unlock(&philo_i->val.death_mutex);
 	return (1);
 }
 
@@ -49,7 +52,10 @@ void	*death_ctrl(void	*void_params)
 	t_params	*params;
 
 	params = (t_params *)void_params;
-	while ((params->val.death_flg < 0) && !meals_ctrl(params->table))
+	if (params->val.max_meals)
+	{
+	while ((*params->val.death_flg < 0) && !meals_ctrl(params->table))
 		usleep(10);
+	}
 	return (NULL);
 }

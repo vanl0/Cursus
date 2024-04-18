@@ -52,6 +52,7 @@ int	check_arg(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_params	params;
+	pthread_t	ctrl;
 
 	if (check_arg(ac, av))
 		return (1);
@@ -59,7 +60,9 @@ int	main(int ac, char **av)
 	params.table = NULL;
 	set_table(&params.table, params.val);
 	start_threads(params.table, &params);
+	pthread_create(&ctrl, NULL, death_ctrl, &params);
 	close_threads(params.val);
+	pthread_join(ctrl, NULL);
 	free_table(params.table);
 	pthread_mutex_destroy(&params.val.write_mutex);
 	free(params.val.death_flg);

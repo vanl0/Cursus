@@ -47,7 +47,7 @@ re: fclean all
 do: 
 	./philo 5 400 200 200
 leaks:
-	leaks --atExit -- ./philo 5 4 4 4 5
+	leaks --atExit -- ./philo 5 450 200 200 10
 valg:
 	valgrind --leak-check=full ./philo 5 4 4 4 5
 
