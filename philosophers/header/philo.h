@@ -24,7 +24,7 @@ typedef struct s_val
 {
 	int				die;
 	int				eat;
-	int 			sleep;
+	int				sleep;
 	int				n_philo;
 	int				max_meals;
 	long int		t0;
@@ -50,7 +50,6 @@ typedef struct s_params
 	t_philo		*table;
 }	t_params;
 
-
 //TABLE
 t_philo		*add_philo(t_philo **table, t_val val, int i);
 void		set_table(t_philo **table, t_val val);
@@ -58,10 +57,13 @@ void		free_table(t_philo *table);
 //THREADS
 void		start_threads(t_philo *philo, t_params *params);
 void		close_threads(t_val val);
+void		*philosopher(void	*void_philo);
+void		*death_ctrl(void	*void_params);
 //PHILO
 void		print_action(t_philo *philo, char *msg);
 void		take_fork(pthread_mutex_t *fork, t_philo *philo);
 void		eat(t_philo *philo);
+void		die(t_philo *philo);
 //TIME
 long int	get_time(long int t0);
 //UTILS

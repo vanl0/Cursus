@@ -1,18 +1,18 @@
 /* ************************************************************************** */
-/*																			  */
-/*														  :::	   ::::::::   */
-/*	 table_utils.c										:+:		 :+:	:+:   */
-/*													  +:+ +:+		  +:+	  */
-/*	 By: ilorenzo <ilorenzo@student.42barcel>		+#+  +:+	   +#+		  */
-/*												  +#+#+#+#+#+	+#+			  */
-/*	 Created: 2024/02/25 16:25:45 by ilorenzo		   #+#	  #+#			  */
-/*	 Updated: 2024/02/25 16:27:11 by ilorenzo		  ###	########.fr		  */
-/*																			  */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   table_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 16:52:58 by ilorenzo          #+#    #+#             */
+/*   Updated: 2024/04/18 16:53:39 by ilorenzo         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
-//printf("new_philo: %d, %p right: %p\n", philo_new->num, philo_new, philo_new->right);
+
 #include "../header/philo.h"
 
-t_philo *set_philo(t_val val, int i)
+t_philo	*set_philo(t_val val, int i)
 {
 	t_philo	*philo_i;
 
@@ -25,7 +25,7 @@ t_philo *set_philo(t_val val, int i)
 	return (philo_i);
 }
 
-t_philo *add_philo(t_philo **table, t_val val, int i)
+t_philo	*add_philo(t_philo **table, t_val val, int i)
 {
 	t_philo	*philo_new;
 	t_philo	*philo_i;
@@ -45,7 +45,7 @@ t_philo *add_philo(t_philo **table, t_val val, int i)
 	return (*table);
 }
 
-void set_table(t_philo **table, t_val val)
+void	set_table(t_philo **table, t_val val)
 {
 	int	i;
 
@@ -60,11 +60,11 @@ void set_table(t_philo **table, t_val val)
 void	free_table(t_philo *table)
 {
 	t_philo	*philo_i;
-	t_philo *philo_free;
+	t_philo	*philo_free;
 
 	philo_free = table->right;
 	philo_i = table->right->right;
-	while(philo_free != table)
+	while (philo_free != table)
 	{
 		pthread_mutex_destroy(&philo_free->fork);
 		free(philo_free);

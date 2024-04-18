@@ -6,40 +6,11 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:23:36 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/03/26 15:25:58 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:52:15 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/philo.h"
-
-void print_t_val(t_val val) {
-    printf("n_philo: %d\n", val.n_philo);
-    printf("die: %d\n", val.die);
-    printf("eat: %d\n", val.eat);
-    printf("sleep: %d\n", val.sleep);
-    printf("max_meals: %d\n", val.max_meals);
-    printf("t0: %ld\n", val.t0);
-}
-
-void	print_list(t_philo *first)
-{
-	t_philo *philo_i;
-	
-	printf("philo %d->", first->num);
-	if (first->right == first)
-	{
-		printf("\n");
-		return ;
-	}
-	philo_i = first->right;
-	while(philo_i != first)
-	{
-		printf("philo %d->", philo_i->num);
-		philo_i = philo_i->right;
-	}
-	printf("\n");
-	return;
-}
 
 t_val	set_val(int ac, char **av)
 {
@@ -72,28 +43,25 @@ int	check_arg(int ac, char **av)
 	while (i < ac)
 	{
 		if (ft_atoi(av[i]) <= 0)
-			return(printf("Invalid arguments\n"));
+			return (printf("Invalid arguments\n"));
 		i++;
 	}
 	return (0);
 }
 
-//print_list(params.table);
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_params	params;
-	
+
 	if (check_arg(ac, av))
 		return (1);
 	params.val = set_val(ac, av);
 	params.table = NULL;
 	set_table(&params.table, params.val);
-	print_list(params.table);
 	start_threads(params.table, &params);
 	close_threads(params.val);
 	free_table(params.table);
 	pthread_mutex_destroy(&params.val.write_mutex);
-	free(params.val.th);
 	free(params.val.death_flg);
 	return (0);
 }
