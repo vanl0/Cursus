@@ -25,22 +25,30 @@ SRCS_LS = main.c threads.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
 
+GRAY = \033[1;30m
+GREEN = \033[3;32m
+NC = \033[0m
+
 all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS) $(HEADER) Makefile
-		$(CC) $(CFLAGS) $(OBJS) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@echo "$(GREEN)$(NAME) compiled succesfully$(NC)"
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c 
-		$(CC) -c $(CFLAGS) $< -o $@
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER) Makefile
+	@$(CC) -c $(CFLAGS) $< -o $@
+	@echo "$(GRAY)$(CC) -c $(CFLAGS) $< -o $@ $(NC)"
 
 $(OBJS_DIR):
-	mkdir $@
+	@mkdir $@
 
 clean:
-	rm -rf $(OBJS_DIR)
+	@echo "$(GREEN)All objects  removed $(NC)"
+	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "$(GREEN)All binaries removed $(NC)"
+	@rm -f $(NAME)
 
 re: fclean all
 
@@ -49,7 +57,7 @@ do:
 leaks:
 	leaks --atExit -- ./philo 5 450 200 200 10
 valg:
-	valgrind --leak-check=full ./philo 5 4 4 4 5
+	valgrind --leak-check=full ./philo 5 450 200 200 8
 
 .PHONY: all clean fclean re do
 	
