@@ -25,7 +25,7 @@ SRCS_LS = main.c threads.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
 
-GRAY = \033[0;30m
+GRAY = \033[2;29m
 GREEN = \033[0;32m
 NC = \033[0m
 
@@ -33,6 +33,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR) $(OBJS) $(HEADER) Makefile
 	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@echo "$(GRAY)$(shell printf '%*s' $(shell tput cols) | tr ' ' '-')$(NC)"
+	@echo "$(GRAY)$(CC) $(CFLAGS) $(OBJS) -o $@ $(NC)"
 	@echo "$(GREEN)$(NAME) compiled succesfully$(NC)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c $(HEADER) Makefile
