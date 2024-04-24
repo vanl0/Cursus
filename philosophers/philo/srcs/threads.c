@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:07:08 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/04/18 17:07:10 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:05:35 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../header/philo.h"
@@ -56,10 +56,9 @@ int	hunger_ctrl(t_philo	*table)
 {
 	t_philo	*philo_i;
 	int		dth_time;
-	long 	t0;
+	long	t0;
 	int		i;
 
-	//printf("HOLAAAAAA\n");
 	philo_i = table;
 	dth_time = table->val.die;
 	t0 = table->val.t0;
@@ -69,10 +68,8 @@ int	hunger_ctrl(t_philo	*table)
 		if ((get_time(t0) - philo_i->last_meal) >= dth_time)
 		{
 			die(philo_i);
-			//printf("die\n");
-			return(1);
+			return (1);
 		}
-		// printf("%d\n", i );
 		philo_i = philo_i->right;
 		i++;
 	}
@@ -84,8 +81,8 @@ void	*death_ctrl(void	*void_params)
 	t_params	*params;
 
 	params = (t_params *)void_params;
-	//printf("HOLAAAAAA\n");
-	while ((*params->val.death_flg < 0) && !meals_ctrl(params->table) && !hunger_ctrl(params->table) )
+	while ((*params->val.death_flg < 0) && !meals_ctrl(params->table) \
+			&& !hunger_ctrl(params->table))
 		usleep(10);
 	close_threads(params->val);
 	return (NULL);

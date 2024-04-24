@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 16:52:58 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/04/18 16:53:39 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:03:05 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_philo	*set_philo(t_val val, int i)
 	t_philo	*philo_i;
 
 	philo_i = malloc(sizeof(t_philo));
+	if (!philo_i)
+		return (NULL);
 	philo_i->num = i;
 	philo_i->val = val;
 	philo_i->last_meal = 0;
@@ -31,6 +33,8 @@ t_philo	*add_philo(t_philo **table, t_val val, int i)
 	t_philo	*philo_i;
 
 	philo_new = set_philo(val, i);
+	if (!philo_new)
+		return (NULL);
 	philo_i = *table;
 	if (!(*table))
 	{
@@ -45,16 +49,22 @@ t_philo	*add_philo(t_philo **table, t_val val, int i)
 	return (*table);
 }
 
-void	set_table(t_philo **table, t_val val)
+int	set_table(t_philo **table, t_val val)
 {
 	int	i;
 
 	i = 0;
 	while (i < val.n_philo)
 	{
-		add_philo(table, val, i);
+		if (!add_philo(table, val, i))
+		{
+			free_table(*table);
+			printf("<malloc error>\n");
+			return (0);
+		}
 		i++;
 	}
+	return (1);
 }
 
 void	free_table(t_philo *table)

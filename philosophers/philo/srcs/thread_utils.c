@@ -56,7 +56,5 @@ void	close_threads(t_val val)
 		pthread_join(val.th[i], NULL);
 		i++;
 	}
-	free(val.th);
-	pthread_mutex_destroy(&val.write_mutex);
 	return ;
 }

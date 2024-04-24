@@ -52,7 +52,7 @@ typedef struct s_params
 
 //TABLE
 t_philo		*add_philo(t_philo **table, t_val val, int i);
-void		set_table(t_philo **table, t_val val);
+int			set_table(t_philo **table, t_val val);
 void		free_table(t_philo *table);
 //THREADS
 void		start_threads(t_philo *philo, t_params *params);

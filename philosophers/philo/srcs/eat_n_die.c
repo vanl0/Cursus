@@ -19,7 +19,7 @@ void	die(t_philo *philo)
 	{
 		*philo->val.death_flg = philo->num;
 		usleep(100);
-		printf("%ld %d has died\n", get_time(philo->val.t0), philo->num);
+		printf("%ld %d died\n", get_time(philo->val.t0), philo->num);
 	}
 	pthread_mutex_unlock(&philo->val.death_mutex);
 	pthread_mutex_unlock(&philo->fork);
@@ -42,7 +42,7 @@ void	take_fork(pthread_mutex_t *fork, t_philo *philo)
 	if ((get_time(philo->val.t0) - philo->last_meal) >= philo->val.die)
 	{
 		die(philo);
-		return;
+		return ;
 	}
 	pthread_mutex_lock(fork);
 	print_action(philo, "has taken a fork");

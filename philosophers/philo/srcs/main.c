@@ -6,7 +6,7 @@
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 15:23:36 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/04/18 16:52:15 by ilorenzo         ###   ########.fr       */
+/*   Updated: 2024/04/24 20:07:57 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 /*LEAKS
 val.th
 val.death_flg
-val.write_mutex
-val.death_mutex
 table
 
 */
@@ -36,7 +34,18 @@ t_val	set_val(int ac, char **av)
 	pthread_mutex_init(&val.write_mutex, NULL);
 	pthread_mutex_init(&val.death_mutex, NULL);
 	val.th = malloc(val.n_philo * sizeof(pthread_t));
+	if (!val.th)
+	{
+		val.th = NULL;
+		return (val);
+	}
 	val.death_flg = malloc(sizeof(int));
+	if (!val.death_flg)
+	{
+		free(val.th);
+		val.death_flg = NULL;
+		return (val);
+	}
 	*val.death_flg = -1;
 	return (val);
 }
@@ -65,12 +74,19 @@ int	main(int ac, char **av)
 	if (check_arg(ac, av))
 		return (1);
 	params.val = set_val(ac, av);
+	if (!params.val.th || !params.val.death_flg)
+		return (printf("<malloc error>\n"));
 	params.table = NULL;
-	set_table(&params.table, params.val);
-	start_threads(params.table, &params);
-	pthread_create(&ctrl, NULL, death_ctrl, &params);
-	pthread_join(ctrl, NULL);
-	free_table(params.table);
+	if (set_table(&params.table, params.val))
+	{
+		start_threads(params.table, &params);
+		pthread_create(&ctrl, NULL, death_ctrl, &params);
+		pthread_join(ctrl, NULL);
+		free_table(params.table);
+	}
 	free(params.val.death_flg);
+	free(params.val.th);
+	pthread_mutex_destroy(&params.val.write_mutex);
+	pthread_mutex_destroy(&params.val.death_mutex);
 	return (0);
 }
