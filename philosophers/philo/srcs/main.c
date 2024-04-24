@@ -12,6 +12,14 @@
 
 #include "../header/philo.h"
 
+/*LEAKS
+val.th
+val.death_flg
+val.write_mutex
+val.death_mutex
+table
+
+*/
 t_val	set_val(int ac, char **av)
 {
 	t_val	val;
@@ -61,10 +69,8 @@ int	main(int ac, char **av)
 	set_table(&params.table, params.val);
 	start_threads(params.table, &params);
 	pthread_create(&ctrl, NULL, death_ctrl, &params);
-	close_threads(params.val);
 	pthread_join(ctrl, NULL);
 	free_table(params.table);
-	pthread_mutex_destroy(&params.val.write_mutex);
 	free(params.val.death_flg);
 	return (0);
 }

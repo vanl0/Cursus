@@ -12,7 +12,7 @@
 
 NAME = philo
 CC = gcc
-CFLAGS = -g -pthread -Wall -Wextra
+CFLAGS = -g -pthread -Wall -Wextra -Werror
 
 
 HEADER = ./header/philo.h
@@ -25,8 +25,8 @@ SRCS_LS = main.c threads.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
 
-GRAY = \033[1;30m
-GREEN = \033[3;32m
+GRAY = \033[0;30m
+GREEN = \033[0;32m
 NC = \033[0m
 
 all: $(NAME)
