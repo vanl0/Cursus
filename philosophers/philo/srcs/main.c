@@ -12,12 +12,6 @@
 
 #include "../header/philo.h"
 
-/*LEAKS
-val.th
-val.death_flg
-table
-
-*/
 t_val	set_val(int ac, char **av)
 {
 	t_val	val;
