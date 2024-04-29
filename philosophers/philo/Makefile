@@ -12,7 +12,7 @@
 
 NAME = philo
 CC = gcc
-CFLAGS = -g -pthread -Wall -Wextra -Werror
+CFLAGS = -g -fsanitize=thread -pthread -Wall -Wextra -Werror
 
 
 HEADER = ./header/philo.h
