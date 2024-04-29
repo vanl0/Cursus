@@ -29,17 +29,17 @@ void	start_threads(t_philo *table, t_params *params)
 	philo = table;
 	i = 0;
 	j = 1;
-	while (i < params->val.n_philo)
+	while (i < params->val->n_philo)
 	{
-		pthread_create(&(params->val.th[i]), NULL, philosopher, philo);
+		pthread_create(&(params->val->th[i]), NULL, philosopher, philo);
 		philo = philo->right->right;
 		i += 2;
 		usleep(100);
 	}
 	philo = table->right;
-	while (j < params->val.n_philo)
+	while (j < params->val->n_philo)
 	{
-		pthread_create(&(params->val.th[j]), NULL, philosopher, philo);
+		pthread_create(&(params->val->th[j]), NULL, philosopher, philo);
 		philo = philo->right->right;
 		j += 2;
 		usleep(100);

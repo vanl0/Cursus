@@ -29,36 +29,41 @@ typedef struct s_val
 	int				max_meals;
 	long int		t0;
 	pthread_t		*th;
-	int				*death_flg;
+	int				death_flg;
 	pthread_mutex_t	death_mutex;
 	pthread_mutex_t	write_mutex;
 }	t_val;
 
 typedef struct s_philo
 {
-	t_val				val;
+	t_val				*val;
 	int					num;
 	pthread_mutex_t		fork;
 	long int			last_meal;
 	int					n_meal;
+	pthread_mutex_t		l_meal_mutex;
+	pthread_mutex_t		n_meal_mutex;
 	struct s_philo		*right;
 }	t_philo;
 
 typedef struct s_params
 {
-	t_val		val;
+	t_val		*val;
 	t_philo		*table;
 }	t_params;
 
 //TABLE
-t_philo		*add_philo(t_philo **table, t_val val, int i);
-int			set_table(t_philo **table, t_val val);
+t_philo		*add_philo(t_philo **table, t_val *val, int i);
+int			set_table(t_philo **table, t_val *val);
 void		free_table(t_philo *table);
 //THREADS
 void		start_threads(t_philo *philo, t_params *params);
 void		close_threads(t_val val);
 void		*philosopher(void	*void_philo);
 void		*death_ctrl(void	*void_params);
+//GET/SET
+int			get_val(long int *val, pthread_mutex_t *lock);
+void		set_val(long int *val, pthread_mutex_t *lock, int new_val);
 //PHILO
 void		print_action(t_philo *philo, char *msg);
 void		take_fork(pthread_mutex_t *fork, t_philo *philo);

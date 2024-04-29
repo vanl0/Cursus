@@ -12,7 +12,7 @@
 
 #include "../header/philo.h"
 
-t_philo	*set_philo(t_val val, int i)
+t_philo	*set_philo(t_val *val, int i)
 {
 	t_philo	*philo_i;
 
@@ -24,10 +24,12 @@ t_philo	*set_philo(t_val val, int i)
 	philo_i->last_meal = 0;
 	philo_i->n_meal = 0;
 	pthread_mutex_init(&(philo_i->fork), NULL);
+	pthread_mutex_init(&(philo_i->l_meal_mutex), NULL);
+	pthread_mutex_init(&(philo_i->n_meal_mutex), NULL);
 	return (philo_i);
 }
 
-t_philo	*add_philo(t_philo **table, t_val val, int i)
+t_philo	*add_philo(t_philo **table, t_val *val, int i)
 {
 	t_philo	*philo_new;
 	t_philo	*philo_i;
@@ -49,12 +51,12 @@ t_philo	*add_philo(t_philo **table, t_val val, int i)
 	return (*table);
 }
 
-int	set_table(t_philo **table, t_val val)
+int	set_table(t_philo **table, t_val *val)
 {
 	int	i;
 
 	i = 0;
-	while (i < val.n_philo)
+	while (i < val->n_philo)
 	{
 		if (!add_philo(table, val, i))
 		{
@@ -77,6 +79,8 @@ void	free_table(t_philo *table)
 	while (philo_free != table)
 	{
 		pthread_mutex_destroy(&philo_free->fork);
+		pthread_mutex_destroy(&philo_free->l_meal_mutex);
+		pthread_mutex_destroy(&philo_free->n_meal_mutex);
 		free(philo_free);
 		philo_free = philo_i;
 		philo_i = philo_i->right;

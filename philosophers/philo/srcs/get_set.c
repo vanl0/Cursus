@@ -12,20 +12,20 @@
 
 #include "../header/philo.h"
 
-int get_val(int *val, pthread_mutex_t *lock)
+int	get_val(long int *val, pthread_mutex_t *lock)
 {
-    int res;
+	int	res;
 
-    pthread_mutex_lock(lock);
-    res = *val;
-    pthread_mutex_unlock(lock);
-    return (res);
+	pthread_mutex_lock(lock);
+	res = *val;
+	pthread_mutex_unlock(lock);
+	return (res);
 }
 
-void set_val(int *val, pthread_mutex_t *lock, int new_val)
+void	set_val(long int *val, pthread_mutex_t *lock, int new_val)
 {
-    pthread_mutex_lock(lock);
-    *val = new_val;
-    pthread_mutex_unlock(lock);
-    return ;
+	pthread_mutex_lock(lock);
+	*val = new_val;
+	pthread_mutex_unlock(lock);
+	return ;
 }

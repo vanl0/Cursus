@@ -12,7 +12,7 @@
 
 NAME = philo
 CC = gcc
-CFLAGS = -g -fsanitize=thread -pthread -Wall -Wextra -Werror
+CFLAGS = -g  -pthread -Wall -Wextra -Werror
 
 
 HEADER = ./header/philo.h
@@ -20,7 +20,7 @@ HEADER = ./header/philo.h
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
 
-SRCS_LS = main.c threads.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c
+SRCS_LS = main.c threads.c thread_utils.c table_utils.c ft_atoi.c eat_n_die.c get_set.c
 
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LS))
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS_LS:.c=.o))
@@ -55,11 +55,10 @@ fclean: clean
 re: fclean all
 
 do: 
-	./philo 5 400 200 200
+	./philo 4 450 200 200 10
 leaks:
 	leaks --atExit -- ./philo 5 450 200 200 10
 valg:
 	valgrind --leak-check=full ./philo 5 450 200 200 8
 
-.PHONY: all clean fclean re do
-	
+.PHONY: all clean fclean re

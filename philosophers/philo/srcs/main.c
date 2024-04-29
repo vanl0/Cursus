@@ -12,7 +12,7 @@
 
 #include "../header/philo.h"
 
-t_val	set_val(int ac, char **av)
+t_val	val_init(int ac, char **av)
 {
 	t_val	val;
 
@@ -33,14 +33,7 @@ t_val	set_val(int ac, char **av)
 		val.th = NULL;
 		return (val);
 	}
-	val.death_flg = malloc(sizeof(int));
-	if (!val.death_flg)
-	{
-		free(val.th);
-		val.death_flg = NULL;
-		return (val);
-	}
-	*val.death_flg = -1;
+	val.death_flg = -1;
 	return (val);
 }
 
@@ -64,12 +57,14 @@ int	main(int ac, char **av)
 {
 	t_params	params;
 	pthread_t	ctrl;
+	t_val		val;
 
 	if (check_arg(ac, av))
 		return (1);
-	params.val = set_val(ac, av);
-	if (!params.val.th || !params.val.death_flg)
+	val = val_init(ac, av);
+	if (!val.th)
 		return (printf("<malloc error>\n"));
+	params.val = &val;
 	params.table = NULL;
 	if (set_table(&params.table, params.val))
 	{
@@ -78,9 +73,8 @@ int	main(int ac, char **av)
 		pthread_join(ctrl, NULL);
 		free_table(params.table);
 	}
-	free(params.val.death_flg);
-	free(params.val.th);
-	pthread_mutex_destroy(&params.val.write_mutex);
-	pthread_mutex_destroy(&params.val.death_mutex);
+	free(val.th);
+	pthread_mutex_destroy(&params.val->write_mutex);
+	pthread_mutex_destroy(&params.val->death_mutex);
 	return (0);
 }
