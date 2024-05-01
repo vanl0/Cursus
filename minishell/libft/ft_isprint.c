@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:30:53 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/05 12:31:07 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/13 12:14:21 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/21 08:54:53 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+int	ft_isprint(int c)
 {
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->content = content;
-	new->next = 0;
-	return (new);
+	if (32 <= c && c <= 126)
+		return (1);
+	return (0);
 }

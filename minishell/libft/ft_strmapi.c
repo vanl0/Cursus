@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:30:53 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/05 12:31:07 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/27 18:33:01 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/29 18:20:25 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	t_list	*new;
+	char	*strmapi;
+	size_t	len;
+	size_t	i;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->content = content;
-	new->next = 0;
-	return (new);
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	strmapi = malloc((len + 1) * sizeof(char));
+	if (!strmapi)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		strmapi[i] = (*f)(i, s[i]);
+		i++;
+	}
+	strmapi[i] = '\0';
+	return (strmapi);
 }

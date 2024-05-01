@@ -51,8 +51,7 @@ void	eat(t_philo *philo)
 	set_val(&philo->last_meal, &philo->l_meal_mutex, \
 	get_time(philo->val->t0));
 	print_action(philo, "is eating");
-	set_val((long *)&philo->n_meal, &philo->n_meal_mutex, \
-	get_val((long *)&philo->n_meal, &philo->n_meal_mutex) + 1);
+	set_val((long *)&philo->n_meal, &philo->n_meal_mutex, get_val((long *)&philo->n_meal, &philo->n_meal_mutex) + 1);
 	usleep(philo->val->eat);
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->right->fork);

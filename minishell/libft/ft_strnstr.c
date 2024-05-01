@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilorenzo <ilorenzo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:30:53 by ilorenzo          #+#    #+#             */
-/*   Updated: 2024/02/05 12:31:07 by ilorenzo         ###   ########.fr       */
+/*   Created: 2023/09/13 15:56:24 by ilorenzo          #+#    #+#             */
+/*   Updated: 2023/09/21 12:16:01 by ilorenzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+char	*ft_strnstr(const char *str, const char *find, size_t len)
 {
-	t_list	*new;
+	size_t	i;
+	int		j;
 
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (0);
-	new->content = content;
-	new->next = 0;
-	return (new);
+	i = 0;
+	j = 0;
+	if (*find == '\0')
+		return ((char *)str);
+	while (i < len && str[i] != '\0')
+	{
+		while (find[j] == str[i + j] && i + j < len)
+		{
+			j++;
+			if (find[j] == '\0')
+				return ((char *)&str[i]);
+		}
+		i++;
+		j = 0;
+	}
+	return (NULL);
 }
